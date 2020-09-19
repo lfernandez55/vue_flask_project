@@ -66,6 +66,58 @@
                 });
         }
 
+        function resource2() {
+            console.log("in resource...");
+            let username = document.getElementById("usern").value;
+            let password = document.getElementById("pass").value;
+            fetch('/api/resource', {
+                method: "GET"
+                ,
+                headers: {
+                    "Content-Type": "text/plain",
+                    'Authorization': 'Basic ' + btoa(username + ":" + password),
+                },
+                //credentials: "same-origin"
+                credentials: "include"
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((resp) => {
+                    console.log(resp)
+                })
+                .catch((err) => {
+                    // Code called when an error occurs during the request
+                    alert('Error: ' + err.message);
+                });
+        }
+
+        function testrole() {
+            console.log("in resource...");
+            let username = document.getElementById("usern2").value;
+            let password = document.getElementById("pass2").value;
+            fetch('/api/testrole', {
+                method: "GET"
+                ,
+                headers: {
+                    "Content-Type": "text/plain",
+                    'Authorization': 'Basic ' + btoa(username + ":" + password),
+                },
+                //credentials: "same-origin"
+                credentials: "include"
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((resp) => {
+                    console.log(resp)
+                })
+                .catch((err) => {
+                    // Code called when an error occurs during the request
+                    alert('Error: ' + err.message);
+                });
+        }
+
         var tokenGlobal = "";
 
         function getToken() {
@@ -146,6 +198,10 @@
     /api/resource <br>
     <button onclick="resource()">api\resource</button>
     <hr>
+    When the below button is pressed it sends sends the fields in the inputs<br>
+    username: <input type="text" id="usern"> password: <input type="text" id="pass"><br>
+    <button onclick="resource2()">api\resource</button>
+    <hr>
     When the following button is pressed the fetch sends miguel opensesame credentials to
     the server and the server responds with a token<br>
     <button onclick="getToken()">api\token</button>
@@ -156,7 +212,14 @@
         the password is ignored)
     ) <br>
     <button onclick="useToken()">api\resource using token</button>
-
+    <hr>
+    When the below button is pressed it sends sends the fields in the inputs to testrole<br>
+    username.  This api call allows u to test the role based authentication in httpauth. The
+    view has a decorator @auth.login_required(role=['admin', 'agent']) which lets in anyone
+    with the admin or agent role.  So try the admin account which should work (lfernandez white).
+    In contrast the (momo black) acct wont work : <input type="text" id="usern2"> password: <input type="text" id="pass2"><br>
+    <button onclick="testrole()">api\testrole</button>
+    <hr>
 </body>
 
 </html>
