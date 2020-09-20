@@ -122,8 +122,10 @@
 
         function getToken() {
             console.log("in resource...");
-            let username = 'miguel';
-            let password = 'opensesame';
+            // let username = 'miguel';
+            // let password = 'opensesame';
+            let username = document.getElementById("usern").value;
+            let password = document.getElementById("pass").value;
             fetch('/api/token', {
                 method: "GET"
                 ,
@@ -202,7 +204,7 @@
     username: <input type="text" id="usern"> password: <input type="text" id="pass"><br>
     <button onclick="resource2()">api\resource</button>
     <hr>
-    When the following button is pressed the fetch sends miguel opensesame credentials to
+    When the following button is pressed the fetch sends the above credentials to
     the server and the server responds with a token<br>
     <button onclick="getToken()">api\token</button>
     <hr>
@@ -220,6 +222,7 @@
     In contrast the (momo black) acct wont work : <input type="text" id="usern2"> password: <input type="text" id="pass2"><br>
     <button onclick="testrole()">api\testrole</button>
     <hr>
+    Also see <a href="/login">Login page</a>
 </body>
 
 </html>

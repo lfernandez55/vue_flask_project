@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Prototype</title>
+    <script>
+        let tokenGlobal = ""
+        function login() {
+            console.log("in resource...");
+            let username = document.getElementById('uname').value;
+            let password = document.getElementById('pword').value;
+            fetch('/api/token', {
+                method: "GET"
+                ,
+                headers: {
+                    "Content-Type": "text/plain",
+                    'Authorization': 'Basic ' + btoa(username + ":" + password),
+                },
+                //credentials: "same-origin"
+                credentials: "include"
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((resp) => {
+                    console.log(resp)
+                    tokenGlobal = resp.token
+                    console.log(tokenGlobal)
+                    message("Token returned and stored in local var (also look for it the console)" )
+                })
+                .catch((err) => {
+                    // Code called when an error occurs during the request
+                    message(err)
+                    alert('Error: ' + err.message);
+                });
+        }
+        function getResource(url) {
+            console.log("in resource...");
+            let username = tokenGlobal;
+            let password = 'unused';
+            // let username = document.getElementById('uname').value;
+            // let password = document.getElementById('pword').value;
+            fetch(url, {
+                method: "GET"
+                ,
+                headers: {
+                    "Content-Type": "text/plain",
+                    'Authorization': 'Basic ' + btoa(username + ":" + password),
+                },
+                //credentials: "same-origin"
+                credentials: "include"
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((resp) => {
+                    console.log(resp)
+                    message(resp)
+                })
+                .catch((err) => {
+                    // Code called when an error occurs during the request
+                    message(err)
+                    alert('Error: ' + err.message);
+                });
+        }
+        function message(msg){
+            document.getElementById('msg').innerHTML=JSON.stringify(msg)
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <p>Messeage returned from server: </p>
+        <div id="msg"></div>
+    </header>
+    <div>
+        <h3>After a successful login this returns a token</h3>
+        
+        <p>Username: <input type="text" id="uname" value="lfernandez"></p> 
+        <p>Password: <input type="text" id=pword value="white"></p>
+        <button onclick="login()">Login</button> 
+    </div>
+    <div>
+        <p>Accounts in DB:</p>
+        <ul>
+            <li>credentials: lfernandez, white; role: admin,agent</li>
+            <li>credentials: momoman, black; role: member</li>
+        </ul>
+        <button onclick="getResource('/api/any')">Get resource available to any logged in user</button>
+        <button onclick="getResource('/api/admin')">Get resource available to admin</button>
+        <button onclick="getResource('/api/member')">Get resource available to member</button>
+        <button onclick="getResource('/api/admin_member')">Get resource available to admin and member</button>
+    </div>
+</body>
+</html>

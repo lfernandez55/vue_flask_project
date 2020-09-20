@@ -96,7 +96,7 @@ if not User.query.filter(User.email == 'lfernandez@weber.edu').first():
     db.session.add(user)
     db.session.commit()
 
-
+############################################ROUTES ROUTES ROUTES ROUTES##########################################
 @auth.verify_password
 def verify_password(username_or_token, password):
     # first try to authenticate by token
@@ -112,6 +112,10 @@ def verify_password(username_or_token, password):
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 @app.route('/api/users', methods=['POST'])
 def new_user():
@@ -149,6 +153,7 @@ def get_auth_token():
 
 
 @app.route('/api/resource')
+# @auth.login_required(role='admin')
 @auth.login_required
 def get_resource():
     return jsonify({'data': 'Hello, %s!' % g.user.username})
@@ -159,33 +164,6 @@ def get_resource():
 @auth.error_handler
 def unauthorized():
     return make_response(jsonify({'error': 'Unauthorized access'}), 403)
-
-
-def restricted(access_level):
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            print(access_level)
-            # print(g.user.username)
-            # username = request.json.get('username')
-            print(request.headers.get('Authorization'))
-            user = "lfernandez@weber.edu"
-            # user = "member@example.com"
-            # sqlStatement = "SELECT roles.name FROM roles JOIN user_roles ON roles.id=user_roles.role_id JOIN users ON users.id=user_roles.user_id WHERE users.email='" + user + "' AND roles.name='" + access_level + "'"
-            sqlStatement = "SELECT roles.name FROM roles JOIN user_roles ON roles.id=user_roles.role_id JOIN users ON users.id=user_roles.user_id WHERE users.email='" + user + "' AND roles.name IN (" + access_level + ")"
-            
-            
-            roleName = db.engine.execute(sqlStatement)
-            roleName = [row for row in roleName]
-            # if len(roleName) > 0 and roleName[0]['name'] == 'member':
-            if len(roleName) > 0:
-                returnValue = 1
-                print("authorized")
-            else:
-                print("NOT authorized")
-            return func(*args, **kwargs)
-        return wrapper
-    return decorator
 
 
 @app.route('/api/testrole')
@@ -201,7 +179,9 @@ def api_demo():
 def get_user_roles(user):
     print('in get_user_roles')
     print(user.username)
-    sqlStatement = "SELECT roles.name FROM roles JOIN user_roles ON roles.id=user_roles.role_id JOIN users ON users.id=user_roles.user_id WHERE users.username='" + user.username + "'"
+    print(auth.current_user())
+    print(g.user.username)
+    sqlStatement = "SELECT roles.name FROM roles JOIN user_roles ON roles.id=user_roles.role_id JOIN users ON users.id=user_roles.user_id WHERE users.username='" + g.user.username + "'"
     lt = db.engine.execute(sqlStatement)
     # converts tuple list to list:
     tupleToList = [item for t in lt for item in t] 
@@ -212,6 +192,31 @@ def get_user_roles(user):
     # return ['admin']
     # return user.get_roles()
     return tupleToList
+
+
+
+@app.route('/api/any')
+@auth.login_required()
+def api_role():
+    return jsonify({'username': g.user.username, 'role': 'any'})
+
+@app.route('/api/admin')
+@auth.login_required(role='admin')
+def api_role_a():
+    return jsonify({'username': g.user.username, 'role': 'admin'})
+
+@app.route('/api/member')
+@auth.login_required(role='member')
+def api_role_c():
+    return jsonify({'username': g.user.username, 'role': 'member'})  
+
+@app.route('/api/admin_member')
+@auth.login_required(role=['admin', 'member'])
+def api_role_b():
+    return jsonify({'username': g.user.username, 'role': 'admin_member'})  
+
+ 
+
 
 
 if __name__ == '__main__':
