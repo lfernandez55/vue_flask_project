@@ -8,9 +8,12 @@ import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import make_response
 from functools import wraps
+from flask_cors import CORS
 
 # initialization
 app = Flask(__name__)
+CORS(app)
+
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
@@ -99,7 +102,9 @@ if not User.query.filter(User.email == 'lfernandez@weber.edu').first():
 ############################################ROUTES ROUTES ROUTES ROUTES##########################################
 import authviews
  
-
+@app.route("/greeting")
+def greeting():
+    return {'greeting': 'Hello from Flask!'}
 
 
 if __name__ == '__main__':
