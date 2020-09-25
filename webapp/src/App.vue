@@ -1,73 +1,80 @@
 <template>
-<div id="app">
-    <p>{{ greeting }}</p>
-    <p>{{ flaskGreeting }}</p>
-    <p>authenticated: {{authenticated}}</p>
-    aaaaa<div id="nav">
-        <!-- <router-link v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Logoutxxx</router-link>  -->
-        
-        <router-link  v-show="authenticated"  to="/logout" v-on:click.native="logout()" >Logout</router-link> 
-    </div>dddddddd
-    <router-view @authenticated="setAuthenticated" />
-    <hello-world></hello-world>
-</div>
+  <div class="container">
+    <app-header />
+    <div class="row">
+      <div class="col-xs-12">
+        Authenticated: {{ authenticated }}
+        <transition name="slide" mode="out-in">
+          <router-view @authenticated="setAuthenticated"></router-view>
+        </transition>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
-    name: 'App',
-    components: {
-        HelloWorld
+  components: {
+    appHeader: Header,
+    appFooter: Footer,
+  },
+  created: function() {
+    this.$store.dispatch("initStocks");
+    this.$store.state.foo = "goo";
+  },
+  data: function() {
+    return {
+      authenticated: false,
+      mockAccount: {
+        username: "aaa",
+        password: "bbb",
+      },
+    };
+  },
+  methods: {
+    setAuthenticated(status) {
+      this.authenticated = status;
     },
-    data: function(){
-        return {
-            greeting: 'Hello, Vue!',
-            flaskGreeting: "",
-            authenticated: false,
-            mockAccount: {
-                username: "aaa",
-                password: "bbb"
-            }
-        }
+    logout() {
+      this.authenticated = false;
     },
-    // mounted() {
-    //     if(!this.authenticated) {
-    //         this.$router.replace({ name: "login" });
-    //     }
-    // },
-    methods: {
-        setAuthenticated(status) {
-            this.authenticated = status;
-        },
-        logout() {
-            this.authenticated = false;
-        }
-    },
-    watch: {
-      authenticated: function(){
-        if (this.authenticated == false){
-          this.$router.replace({ name: "login" });
-        }
-        
+  },
+  watch: {
+    authenticated: function() {
+      if (this.authenticated == false) {
+        this.$router.replace({ name: "login" });
+      } else {
+        this.$router.replace({ name: "secure" });
       }
     },
-    created: async function(){
-        const gResponse = await fetch("http://localhost:5000/greeting");
-        const gObject = await gResponse.json();
-        this.flaskGreeting = gObject.greeting;
-    }
-}
+  },
+};
 </script>
 
 <style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+body {
+  padding: 30px;
+}
+
+.slide-enter {
+  opacity: 0;
+}
+
+.slide-enter-active {
+  animation: slide-in 1s ease-out forwards;
+  transition: opacity 0.5s;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 </style>
