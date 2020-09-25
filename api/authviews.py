@@ -1,7 +1,7 @@
 from app import app
 from app import auth
 from app import User, g
-from flask import Flask, abort, request, jsonify, url_for, render_template
+from flask import Flask, abort, request, jsonify, url_for, render_template, make_response
 
 @auth.verify_password
 def verify_password(username_or_token, password):
