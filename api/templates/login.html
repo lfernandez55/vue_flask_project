@@ -35,6 +35,38 @@
                     alert('Error: ' + err.message);
                 });
         }
+
+        function greeting() {
+            console.log("in resource...");
+            let username = document.getElementById('uname').value;
+            let password = document.getElementById('pword').value;
+            fetch('/greeting', {
+                method: "GET"
+                ,
+                headers: {
+                    "Content-Type": "text/plain",
+                    'Authorization': 'Basic ' + btoa(username + ":" + password),
+                },
+                //credentials: "same-origin"
+                credentials: "include"
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((resp) => {
+                    console.log(resp)
+                    tokenGlobal = resp.token
+                    console.log(tokenGlobal)
+                    message("Token returned and stored in local var (also look for it the console)" )
+                })
+                .catch((err) => {
+                    // Code called when an error occurs during the request
+                    message(err)
+                    alert('Error: ' + err.message);
+                });
+        }
+
+
         function getResource(url) {
             console.log("in resource...");
             let username = tokenGlobal;
@@ -80,6 +112,7 @@
         <p>Username: <input type="text" id="uname" value="lfernandez"></p> 
         <p>Password: <input type="text" id=pword value="white"></p>
         <button onclick="login()">Login</button> 
+        <button onclick="greeting()">Greeting</button> 
     </div>
     <div>
         <p>Accounts in DB:</p>

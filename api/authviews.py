@@ -54,6 +54,7 @@ def get_user(id):
 @app.route('/api/token')
 @auth.login_required
 def get_auth_token():
+    print(request.headers)
     token = g.user.generate_auth_token(600)
     return jsonify({'token': token.decode('ascii'), 'duration': 600})
 

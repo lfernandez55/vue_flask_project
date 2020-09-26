@@ -8,16 +8,24 @@ import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import make_response
 from functools import wraps
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 # initialization
 app = Flask(__name__)
-CORS(app)
+
+# the below should make all routes cross origin enabled
+# see: https://stackoverflow.com/questions/25594893/how-to-enable-cors-in-flask
+CORS(app) 
 
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# This not needed but see https://stackoverflow.com/questions/26980713/solve-cross-origin-resource-sharing-with-flask
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app, resources={r"/greeting": {"origins": "http://localhost:8080"}})
+# cors = CORS(app, resources={r"/greeting": {"origins": "*"}})
 
 # extensions
 db = SQLAlchemy(app)
@@ -103,8 +111,12 @@ if not User.query.filter(User.email == 'lfernandez@weber.edu').first():
 import authviews
  
 @app.route("/greeting")
+# @cross_origin(origin='localhost:8080',headers=['Content- Type','Authorization'])
+# @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def greeting():
-    return {'greeting': 'Hello from Flask!'}
+    print(request.headers)
+    # return request.headers;
+    return {'greeting': request.headers['Authorization']}
 
 
 if __name__ == '__main__':
