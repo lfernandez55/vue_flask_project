@@ -3,9 +3,12 @@
     <h1>Secure Area</h1>
     <p>Token: {{ this.$store.state.auth.token }}</p>
     <p>Token with getter: {{ this.$store.getters.token }}</p>
-    <p>Message from server: {{serverMsg}}</p>
+    <hr>
+    <h3>Welcome: </h3>
+    <p>{{ this.$store.state.auth.firstName }}</p>
+    <p>{{ this.$store.state.auth.lastName }}</p>
     <p>{{ this.$store.state.auth.email }}</p>
-    <button @click="loadUserAccountData()">Load User Account Data</button>
+    <!-- <button @click="loadUserAccountData()">Load User Account Data</button> -->
   </div>
 </template>
 
@@ -26,7 +29,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      loadUserInfo: 'loadUserData'
+    //   loadUserInfo: 'loadUserData',
+      loadAuthUser: 'loadAccountData'
     }),
     // getData() {
     //   let headerObj = {
@@ -54,7 +58,8 @@ export default {
     //     });
     // },
     loadUserAccountData(){
-        this.loadUserInfo(this.$store.state.auth.token);
+        // this.loadUserInfo(this.$store.state.auth.token);
+        this.loadAuthUser();
     }
   },
 };
