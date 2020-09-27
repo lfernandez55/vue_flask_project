@@ -35,7 +35,7 @@ export default {
           },
         };
         this.$http
-          .get("http://127.0.0.1:5000/api/token", headerObj)
+          .get("api/token", headerObj)
           .then((response) => response.json())
           .then((data) => {
             if (data) {

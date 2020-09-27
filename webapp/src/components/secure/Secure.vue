@@ -17,7 +17,6 @@ export default {
     };
   },
   mounted: function() {
-    alert("dddddd");
     this.getData();
   },
   methods: {
@@ -30,7 +29,7 @@ export default {
         },
       };
       this.$http
-        .get("http://127.0.0.1:5000/api/resource", headerObj)
+        .get("api/resource", headerObj)
         .then((response) => response.json())
         .then((resp) => {
           if (resp) {

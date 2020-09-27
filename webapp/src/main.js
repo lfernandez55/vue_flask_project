@@ -27,7 +27,7 @@ Vue.use(VueResource);
 //npm install --save vue-resource  (for requesting data from server)
 
 //Vue.http.options.root = "https://web2630stocktrader-d7e4e.firebaseio.com/"
-// Vue.http.options.root = "http://127.0.0.1:5000";
+Vue.http.options.root = "http://127.0.0.1:5000";
 
 Vue.filter("currency", (value) => {
   return value.toLocaleString();
