@@ -65,6 +65,15 @@ def get_auth_token():
 def get_resource():
     return jsonify({'data': 'Hello, %s!' % g.user.username})
 
+@app.route('/api/account')
+# @auth.login_required(role='admin')
+@auth.login_required
+def get_account():
+    return jsonify({ \
+        'username': g.user.username, \
+        'email': g.user.email, \
+        'firstname': g.user.firstname, 'lastname': g.user.lastname \
+    })
 
 # See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 # search on 401 replacing with 403
