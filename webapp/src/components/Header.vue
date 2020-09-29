@@ -14,6 +14,9 @@
         </strong>
         <ul class="nav navbar-nav navbar-right">
           <li v-show="this.$store.getters.authenticated">
+            <a href="#" @click="profile">{{ this.$store.state.auth.email }}</a>
+          </li>
+          <li v-show="this.$store.getters.authenticated">
             <a href="#" @click="logOut">Logout</a>
           </li>
 
@@ -59,6 +62,9 @@ export default {
 
     logOut: function(){
       this.$store.dispatch('setToken',"")
+    },
+    profile: function(){
+      this.$router.replace({ name: "profile" });
     },
     saveData: function(){
       const data = {
