@@ -51,7 +51,14 @@ export default {
         this.$router.replace({ name: "secure" });
       }
     },
-  },
+    //see https://stackoverflow.com/questions/54870454/watching-a-vuex-store
+    '$store.state.auth.token'(value, oldValue) {
+      console.log("xyxeee", value, oldValue);
+      if (value == ""){
+        this.$router.replace({ name: "login" });
+      }
+      }
+  }
 };
 </script>
 

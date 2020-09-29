@@ -60,6 +60,13 @@ const actions = {
 const getters = {
     token: state => {
         return state.token
+    },
+    authenticated: state => {
+      if (state.token == ""){
+        return false;
+      } else {
+        return true;
+      }
     }
 }
 
