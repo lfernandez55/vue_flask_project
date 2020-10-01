@@ -96,6 +96,43 @@
                     alert('Error: ' + err.message);
                 });
         }
+
+        function postMe(url) {
+            console.log("in postMe...");
+            let username = tokenGlobal;
+            let password = 'unused';
+            // let username = document.getElementById('uname').value;
+            // let password = document.getElementById('pword').value;
+            let data = {
+                firstname: "LukiePie"
+            }
+            fetch(url, {
+                method: "PUT"
+                ,
+                headers: {
+                    // "Content-Type": "text/plain",
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + btoa(username + ":" + password),
+                },
+                //credentials: "same-origin"
+                credentials: "include",
+                body: JSON.stringify(data)
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((resp) => {
+                    console.log(resp)
+                    message(resp)
+                })
+                .catch((err) => {
+                    // Code called when an error occurs during the request
+                    message(err)
+                    alert('Error: ' + err.message);
+                });
+        }
+
+
         function message(msg){
             document.getElementById('msg').innerHTML=JSON.stringify(msg)
         }
@@ -124,6 +161,8 @@
         <button onclick="getResource('/api/admin')">Get resource available to admin</button>
         <button onclick="getResource('/api/member')">Get resource available to member</button>
         <button onclick="getResource('/api/admin_member')">Get resource available to admin and member</button>
+        <button onclick="postMe('/api/profile')">Profile</button>
+    
     </div>
 </body>
 </html>

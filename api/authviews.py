@@ -75,20 +75,17 @@ def get_account():
         'firstname': g.user.firstname, 'lastname': g.user.lastname \
     })
 
-@app.route('/profile', methods=['PUT'])
-# @app.route('/profile')
-# @auth.login_required
+@app.route('/api/profile', methods=['PUT'])
+@auth.login_required
 def profile():
     print("in profile....AAddddDF")
-    print(request.json)
-    # username = request.json.get('username')
-    # password = request.json.get('password')
-    # email = request.json.get('email')
-    # firstname = request.json.get('password')
-    lastname = request.json.get('firstname')
-    firstname = request.json.get('lastname')
+
+    firstname = request.json.get('firstname')
+    # lastname = request.json.get('lastname')
     print(firstname)
-    print(lastname)
+    # print(lastname)
+
+
     return jsonify({'username': "DEBUG"})
 
 

@@ -91,25 +91,24 @@ const actions = {
       //     alert("In actions.js error thrown: " + err)
       //   });
       console.log("UserObj", userObj);
-      const data = {
-        funds:  "aaa",
-        stockPortfolio: "bbbb",
-        stocks: "cccc"
-      }
+
+      let data = {
+        firstname: "LukiePie"
+    }
       let headerObj = {
-        firstname: userObj.firstname,
-        lastname: userObj.lastname,
+        // firstname: userObj.firstname,
+        // lastname: userObj.lastname,
         headers: {
-          "Content-Type": "text/plain",
+          "Content-Type": "'application/json'",
           Authorization:
             "Basic " + btoa(state.token + ":" + "whatever"),
-        },
+        }
       };
       console.log(data)
 
       // this.$http.put('https://web2630stocktrader-d7e4e.firebaseio.com/data.json', data)
       //Vue.http.put('http://127.0.0.1:5000/profile',  JSON.stringify(data), headerObj)
-      Vue.http.put('http://127.0.0.1:5000/profile',  headerObj)
+      Vue.http.put('http://127.0.0.1:5000/profile',JSON.stringify(data),  headerObj)
         .then(response =>{
           // eslint-disable-next-line no-console
           console.log(response)

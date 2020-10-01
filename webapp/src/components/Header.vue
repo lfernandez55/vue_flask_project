@@ -77,10 +77,12 @@ export default {
           "Content-Type": "text/plain",
           Authorization:
             "Basic " + btoa(this.$store.state.auth.token + ":" + "whatever"),
-        },
+        }
+        
       };
+      console.log(data)
       // this.$http.put('https://web2630stocktrader-d7e4e.firebaseio.com/data.json', data)
-      this.$http.put('http://127.0.0.1:5000/profile',  data, headerObj)
+      this.$http.put('http://127.0.0.1:5000/profile', data, headerObj)
         .then(response =>{
           // eslint-disable-next-line no-console
           console.log(response)
