@@ -1,12 +1,13 @@
 <template>
   <div class="row">
+    <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
     <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
-      <h1>User profile</h1>
+      <h2>User profile</h2>
 
-      <form action="" method="POST" class="form" role="form">
+      <form action="" method="POST" class="form" role="form" v-on:submit.prevent="update">
         <div class="form-group  ">
           <label for="first_name" class="control-label">First name</label>
-          <input
+          <input v-model="input.firstname"
             class="form-control"
             id="first_name"
             name="first_name"
@@ -18,7 +19,7 @@
         </div>
         <div class="form-group  ">
           <label for="last_name" class="control-label">Last name</label>
-          <input
+          <input v-model="input.lastname"
             class="form-control"
             id="last_name"
             name="last_name"
@@ -28,7 +29,7 @@
             value="Example"
           />
         </div>
-        <input
+        <input 
           type="submit"
           name="submit"
           class="btn btn-default btn-primary"
@@ -47,55 +48,27 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Profile",
   data() {
     return {
       input: {
-        username: "lfernandez",
-        password: "white",
+        firstname: this.$store.state.auth.firstName,
+        lastname: this.$store.state.auth.lastName
       },
       msg: "",
     };
   },
   methods: {
-    login() {
-      if (this.input.username != "" && this.input.password != "") {
-        let headerObj = {
-          headers: {
-            "Content-Type": "text/plain",
-            Authorization:
-              "Basic " + btoa(this.input.username + ":" + this.input.password),
-          },
-        };
-        this.$http
-          .get("api/token", headerObj)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data) {
-              console.log(data);
-              if (data.token) {
-                //this.$emit("authenticated", true);
-                this.$router.replace({ name: "secure" });
-                this.$store.dispatch("setToken", data.token);
-              }
-            }
-          })
-          .catch((err) => {
-            if (err.body.error == "Unauthorized access") {
-              this.msg = err.body.error;
-            } else {
-              console.log("Error: " + err.message);
-            }
-          });
-      } else {
-        this.msg = "A username and password must be present";
-        console.log("A username and password must be present");
-      }
+    update() {
+      this.$store.dispatch("updateProfile", this.input);
     },
   },
 };
 </script>
 
 <style scoped>
-
+ form{
+   margin: auto;
+ }
+ text-align: center;
 </style>

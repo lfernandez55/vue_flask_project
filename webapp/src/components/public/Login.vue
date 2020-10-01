@@ -1,15 +1,45 @@
 <template>
   <div id="login">
-    <h1>Login</h1>
-    <h4>{{msg}}</h4>
-    <h5>
-        Token: {{this.$store.state.auth.token}}
-    </h5>
-    
-    <input type="text" v-model="input.username" placeholder="Username" />
-    <input type="password" v-model="input.password" placeholder="Password" />
-    <button type="button" v-on:click="login()">Login</button>
-     </div>
+    <div class="row">
+      <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
+      <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
+        <h2>Login</h2>
+
+        <h4>{{ msg }}</h4>
+        <div class="form-group  ">
+          <label for="login" class="control-label">Login name</label>
+
+          <input
+            class="form-control"
+            id="login"
+            type="text"
+            v-model="input.username"
+            placeholder="Username"
+          />
+        </div>
+        <div class="form-group  ">
+          <label for="password" id="password" class="control-label"
+            >Password</label
+          >
+
+          <input
+            class="form-control"
+            type="password"
+            v-model="input.password"
+            placeholder="Password"
+          />
+        </div>
+
+        <button
+          class="btn btn-default btn-primary"
+          type="button"
+          v-on:click="login()"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -21,7 +51,7 @@ export default {
         username: "lfernandez",
         password: "white",
       },
-      msg:""
+      msg: "",
     };
   },
   methods: {
@@ -40,31 +70,31 @@ export default {
           .then((data) => {
             if (data) {
               console.log(data);
-              if (data.token){
-                    //this.$emit("authenticated", true);
-                    this.$router.replace({ name: "secure" }); 
-                    this.$store.dispatch('setToken',data.token)
+              if (data.token) {
+                //this.$emit("authenticated", true);
+                this.$router.replace({ name: "secure" });
+                this.$store.dispatch("setToken", data.token);
               }
             }
           })
           .catch((err) => {
             if (err.body.error == "Unauthorized access") {
-                this.msg = err.body.error
-            }else{
-                console.log("Error: " + err.message);
+              this.msg = err.body.error;
+            } else {
+              console.log("Error: " + err.message);
             }
           });
       } else {
         this.msg = "A username and password must be present";
         console.log("A username and password must be present");
       }
-    }
+    },
   },
 };
 </script>
 
 <style scoped>
-#login {
+/* #login {
   width: 500px;
   border: 1px solid #cccccc;
   background-color: #ffffff;
@@ -72,5 +102,7 @@ export default {
   margin-top: 50px;
   padding: 20px;
 }
-h4{color: red;}
+h4 {
+  color: red;
+} */
 </style>

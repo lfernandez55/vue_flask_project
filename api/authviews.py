@@ -1,6 +1,6 @@
 from app import app
 from app import auth
-from app import User, g
+from app import User, g, db
 from flask import Flask, abort, request, jsonify, url_for, render_template, make_response
 
 @auth.verify_password
@@ -74,6 +74,23 @@ def get_account():
         'email': g.user.email, \
         'firstname': g.user.firstname, 'lastname': g.user.lastname \
     })
+
+@app.route('/profile', methods=['PUT'])
+# @app.route('/profile')
+# @auth.login_required
+def profile():
+    print("in profile....AAddddDF")
+    print(request.json)
+    # username = request.json.get('username')
+    # password = request.json.get('password')
+    # email = request.json.get('email')
+    # firstname = request.json.get('password')
+    lastname = request.json.get('firstname')
+    firstname = request.json.get('lastname')
+    print(firstname)
+    print(lastname)
+    return jsonify({'username': "DEBUG"})
+
 
 # See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 # search on 401 replacing with 403
