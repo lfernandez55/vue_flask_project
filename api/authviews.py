@@ -76,17 +76,37 @@ def get_account():
     })
 
 @app.route('/api/profile', methods=['PUT'])
+# @app.route('/api/profile')
 @auth.login_required
 def profile():
     print("in profile....AAddddDF")
 
-    firstname = request.json.get('firstname')
-    # lastname = request.json.get('lastname')
-    print(firstname)
-    # print(lastname)
-
+    # firstname = request.json.get('firstname')
+    # print(firstname)
 
     return jsonify({'username': "DEBUG"})
+
+
+# def _build_cors_prelight_response():
+#     response = make_response()
+#     response.headers.add("Access-Control-Allow-Origin", "*")
+#     response.headers.add('Access-Control-Allow-Headers', "*")
+#     response.headers.add('Access-Control-Allow-Methods', "*")
+#     return response
+
+# def _corsify_actual_response(response):
+#     response.headers.add("Access-Control-Allow-Origin", "*")
+#     return response
+
+# @app.route("/api/profile", methods=["POST", "OPTIONS"])
+# def api_create_order():
+#     if request.method == "OPTIONS": # CORS preflight
+#         return _build_cors_prelight_response()
+#     elif request.method == "POST": # The actual request following the preflight
+#         order = {"order_id": 123, "status": "shipped"}
+#         return _corsify_actual_response(jsonify(order.to_dict()))
+#     # else
+#     #     raise RuntimeError("Weird - don't know how to handle method {}".format(request.method))
 
 
 # See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask

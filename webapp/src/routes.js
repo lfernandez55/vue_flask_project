@@ -4,7 +4,7 @@ import Stocks from './components/stocks/Stocks.vue'
 import Login from './components/public/Login.vue'
 import Secure from './components/secure/Secure.vue'
 import Profile from './components/profile/Profile.vue'
-
+import Debug from './components/public/Debug.vue'
 
 export const routes = [
   {path: '/', component: Login, name: 'login'},
@@ -12,5 +12,6 @@ export const routes = [
   {path: '/stocks', component: Stocks, name: 'stocks'},
   // {path: '/login', component: Login, name: 'login'},
   {path: '/secure', component: Secure, name: 'secure'},
-  {path: '/profile', component: Profile, name: 'profile'}
+  {path: '/profile', component: Profile, name: 'profile'},
+  {path: '/debug', component: Debug, name: 'debug'}
 ];
