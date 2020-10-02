@@ -2,6 +2,7 @@ from app import app
 from app import auth
 from app import User, g, db
 from flask import Flask, abort, request, jsonify, url_for, render_template, make_response
+import copy
 
 @auth.verify_password
 def verify_password(username_or_token, password):
@@ -89,8 +90,16 @@ def profile():
     userObj.lastname = request.json.get('lastname')
     db.session.add(userObj)
     db.session.commit()
-    return jsonify({'username': firstname})
-
+    print(userObj)
+    # return jsonify({'username': firstname})
+    # for security reasons getting rid of the password before sending this back
+    objCopy = copy.deepcopy(userObj)
+    objCopy.password_hash = ""
+    # return jsonify(userObj)
+    userObj2 = User.query.filter(User.username == g.user.username).first()
+    print("marker")
+    print(userObj2)
+    return jsonify(objCopy)
 
 # See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 # search on 401 replacing with 403

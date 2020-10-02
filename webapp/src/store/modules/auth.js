@@ -80,7 +80,7 @@ const actions = {
       })
       .then((resp) => {
         console.log(resp);
-        commit('SET_FOO',resp)
+        commit('SET_ACCOUNT',resp)
       })
       .catch((err) => {
         alert("Error: " + err.message);

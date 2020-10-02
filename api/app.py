@@ -9,6 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import make_response
 from functools import wraps
 from flask_cors import CORS, cross_origin
+from dataclasses import dataclass
 
 # initialization
 app = Flask(__name__)
@@ -31,9 +32,17 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 auth = HTTPBasicAuth()
 
-
+@dataclass
 class User(db.Model):
     __tablename__ = 'users'
+
+    id: int
+    username: str
+    password_hash: str
+    email: str
+    firstname: str
+    lastname: str
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True, nullable=False, unique=True)
     password_hash = db.Column(db.String(64))
