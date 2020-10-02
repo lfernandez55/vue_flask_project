@@ -60,27 +60,19 @@ const actions = {
   //   commit('BUY_STOCK', order);
   // }
   updateProfile: ({ commit }, userObj) => {
-    //Vue.http.put('http://127.0.0.1:5000/api/profile',  JSON.stringify(data), headerObj)
-    //"Basic " + btoa(state.token + ":" + "whatever"),
-    //'Basic ' + btoa(state.token + ':' + 'whatever'),
-    //commit('SET_FOO',response)
     console.log("in updateProfile", userObj)
     let url = 'http://127.0.0.1:5000/api/profile';
     let data = {
-      firstname: "LukiePie",
+      firstname: userObj.firstname,
+      lastname: userObj.lastname
     };
     console.log(data)
     fetch(url, {
       method: "PUT",
-      // method: "PUT"
-      // ,
       headers: {
-        // "Content-Type": "text/plain",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(state.token + ":" + "whatever")
+        "Authorization": "Basic " + btoa(state.token + ":" + "whatever")
       },
-      // //credentials: "same-origin"
-      // credentials: "include",
       body: JSON.stringify(data),
     })
       .then((response) => {
