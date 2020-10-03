@@ -3,7 +3,7 @@
     <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
     <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
       <h2>User profile {{ this.$store.state.auth.firstName }}</h2>
-      <h4>{{msg}}</h4>
+      <h4>{{ this.$store.state.auth.fetchStatus }}</h4>
       <form
         action=""
         method="POST"
@@ -68,20 +68,15 @@ export default {
   },
   methods: {
     update() {
-      this.$store
-        .dispatch("updateProfile", this.input)
-        // see https://stackoverflow.com/questions/40165766/returning-promises-from-vuex-actions
-        .then((res) => {
-          console.log("in profile", res)
-          if (res.error) {
-            console.log("failure");
-            this.msg = res.error
-          } else {
-            console.log("success");
-            this.msg = "Update succeeded";
-            this.$router.replace({ name: "secure" });
-          }
-        });
+      this.$store.dispatch("updateProfile", this.input);
+    },
+  },
+  watch: {
+    "$store.state.auth.fetchStatus"(value) {
+      if (value == "success") {
+        this.$store.state.auth.fetchStatus = "";
+        this.$router.replace({ name: "secure" });
+      }
     },
   },
 };
@@ -92,7 +87,7 @@ form {
   margin: auto;
 }
 
-h4{
+h4 {
   color: red;
 }
 </style>

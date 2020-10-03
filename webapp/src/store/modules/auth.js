@@ -5,7 +5,8 @@ const state = {
   username: "",
   email: "",
   firstName: "",
-  lastName: ""
+  lastName: "",
+  fetchStatus: ""
 }
 
 const mutations = {
@@ -22,7 +23,10 @@ const mutations = {
   },
   SET_FOO: function (state, resp) {
     console.log("in SET_FOO", resp)
-
+  },
+  SET_FETCH_STATUS: function (state, status) {
+    console.log("in SET_FETCH_STATUS", status)
+    state.fetchStatus = status;
   }
 }
 
@@ -57,7 +61,6 @@ const actions = {
   //   commit('BUY_STOCK', order);
   // }
   updateProfile: ({ commit }, userObj) => {
-    return new Promise((resolve, reject) => {
       console.log("in updateProfile", userObj)
       let url = Vue.prototype.$hostname + '/api/profile';
       let data = {
@@ -81,13 +84,17 @@ const actions = {
           console.log(Vue.prototype.$hostname)
           commit('SET_ACCOUNT',resp);
           resp.foo = "success";
-          resolve(resp)
+          if(resp.error){
+            commit('SET_FETCH_STATUS',resp.error);
+          }else{
+            commit('SET_FETCH_STATUS','success');
+          }
+          
         })
         .catch((err) => {
           alert("Error: " + err.message);
-          reject(err)
+          commit('SET_FETCH_STATUS',err);
         });
-    })
   },
 }
 
