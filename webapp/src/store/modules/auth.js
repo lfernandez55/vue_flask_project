@@ -6,7 +6,8 @@ const state = {
   email: "",
   firstName: "",
   lastName: "",
-  fetchStatus: ""
+  fetchStatus: "",
+  flashMessage: ""
 }
 
 const mutations = {
@@ -24,9 +25,11 @@ const mutations = {
   SET_FOO: function (state, resp) {
     console.log("in SET_FOO", resp)
   },
-  SET_FETCH_STATUS: function (state, status) {
-    console.log("in SET_FETCH_STATUS", status)
-    state.fetchStatus = status;
+  SET_FETCH_STATUS: function (state, payload) {
+    console.log("in SET_FETCH_STATUS", payload)
+    state.fetchStatus = payload.status;
+    state.flashMessage = payload.flashMessage;
+    setTimeout(()=>{state.flashMessage = ""; console.log("in settimeout")},3000)
   }
 }
 
@@ -85,15 +88,27 @@ const actions = {
           commit('SET_ACCOUNT',resp);
           resp.foo = "success";
           if(resp.error){
-            commit('SET_FETCH_STATUS',resp.error);
+            let payload = {
+              status: resp.error,
+              flashMessage: 'Darn.  Something went wrong!'
+            }
+            commit('SET_FETCH_STATUS',payload);
           }else{
-            commit('SET_FETCH_STATUS','success');
+            let payload = {
+              status: 'success',
+              flashMessage: 'Profile updated!'
+            }
+            commit('SET_FETCH_STATUS',payload);
           }
           
         })
         .catch((err) => {
           alert("Error: " + err.message);
-          commit('SET_FETCH_STATUS',err);
+          let payload = {
+            status: err,
+            flashMessage: 'Something went wrong'
+          }
+          commit('SET_FETCH_STATUS',payload);
         });
   },
 }
