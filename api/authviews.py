@@ -98,8 +98,9 @@ def profile():
     # return jsonify(userObj)
     userObj2 = User.query.filter(User.username == g.user.username).first()
     print("marker")
-    print(userObj2)
+    # print(userObj2)
     return jsonify(objCopy)
+    # return make_response(jsonify({'error': 'Unauthorized access'}), 403)
 
 # See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 # search on 401 replacing with 403

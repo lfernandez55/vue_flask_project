@@ -31,10 +31,6 @@ const actions = {
     commit('SET_TOKEN', tokenStr)
   },
   loadAccountData: ({ commit }) => {
-    // var resp = {}
-    // console.log("in actions auth:", state.token)
-    // commit('SET_ACCOUNT', resp)
-    // console.log("in actions.js", token)
     let headerObj = {
       headers: {
         "Content-Type": "text/plain",
@@ -42,8 +38,9 @@ const actions = {
           "Basic " + btoa(state.token + ":" + "whatever"),
       },
     };
+    // here we use vue-resource. below we use standard fetch
+    // (IMO standard fetch is better)
     Vue.http
-      // this.$http
       .get("api/account", headerObj)
       .then((response) => response.json())
       .then((resp) => {
@@ -60,31 +57,37 @@ const actions = {
   //   commit('BUY_STOCK', order);
   // }
   updateProfile: ({ commit }, userObj) => {
-    console.log("in updateProfile", userObj)
-    let url = 'http://127.0.0.1:5000/api/profile';
-    let data = {
-      firstname: userObj.firstname,
-      lastname: userObj.lastname
-    };
-    console.log(data)
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Basic " + btoa(state.token + ":" + "whatever")
-      },
-      body: JSON.stringify(data),
+    return new Promise((resolve, reject) => {
+      console.log("in updateProfile", userObj)
+      let url = Vue.prototype.$hostname + '/api/profile';
+      let data = {
+        firstname: userObj.firstname,
+        lastname: userObj.lastname
+      };
+      console.log(data)
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Basic " + btoa(state.token + ":" + "whatever")
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((resp) => {
+          console.log(resp);
+          console.log(Vue.prototype.$hostname)
+          commit('SET_ACCOUNT',resp);
+          resp.foo = "success";
+          resolve(resp)
+        })
+        .catch((err) => {
+          alert("Error: " + err.message);
+          reject(err)
+        });
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((resp) => {
-        console.log(resp);
-        commit('SET_ACCOUNT',resp)
-      })
-      .catch((err) => {
-        alert("Error: " + err.message);
-      });
   },
 }
 

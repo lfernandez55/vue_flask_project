@@ -29,6 +29,8 @@ Vue.use(VueResource);
 //Vue.http.options.root = "https://web2630stocktrader-d7e4e.firebaseio.com/"
 Vue.http.options.root = "http://127.0.0.1:5000";
 
+Vue.prototype.$hostname = 'http://localhost:5000'
+
 Vue.filter("currency", (value) => {
   return value.toLocaleString();
 });
