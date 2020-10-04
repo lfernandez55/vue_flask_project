@@ -74,7 +74,7 @@ export default {
   watch: {
     "$store.state.general.fetchStatus"(value) {
       if (value == "success") {
-        this.$store.state.general.fetchStatus = "";
+        // this.$store.state.general.fetchStatus = "";
         this.$router.replace({ name: "secure" });
       }
     },

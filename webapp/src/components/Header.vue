@@ -2,14 +2,15 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <transition name="slide" mode="out-in">
-        <div id="flash" v-show="this.$store.state.general.flashMessage != ''">
-          {{this.$store.state.general.flashMessage}}
+        <div id="flash" v-show="this.$store.state.general.flashMessage != ''" v-bind:style="myStyle">
+          {{ this.$store.state.general.flashMessage }}
         </div>
       </transition>
       <div class="navbar-header">
         <router-link to="/" class="navbar-brand">Vue-Flask App</router-link>
       </div>
-       <!-- {{$store.state.general.flashMessage}}  -->
+      <!-- {{$store.state.general.flashMessage}}  --> 
+      <!-- {{this.$store.state.general.fetchStatus}} -->
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <router-link tag="li" to="/secure" active-class="active"
@@ -30,15 +31,27 @@
 </template>
 
 <script>
-// import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      isDropdownOpen: false
+      isDropdownOpen: false,
     };
   },
-   methods: {
+  computed: {
+    myStyle: function() {
+      if (this.$store.state.general.fetchStatus == "success") {
+        return {
+          backgroundColor: "#33FF66",
+        };
+      } else {
+        return {
+          backgroundColor: "#FF6666",
+        };
+      }
+    },
+  },
+  methods: {
     logOut: function() {
       this.$store.dispatch("setToken", "");
     },
@@ -68,12 +81,14 @@ export default {
           console.log(error);
           alert("an error occurred");
         };
-    }
+    },
   },
 };
+
 </script>
 
 <style scoped>
+
 #flash {
   text-align: center;
   width: 40%;
