@@ -3,9 +3,7 @@
     <app-header />
     <div class="row">
       <div class="col-xs-12">
-        <!-- Authenticated: {{ authenticated }} -->
         <transition name="slide" mode="out-in">
-          <!-- <router-view @authenticated="setAuthenticated"></router-view> -->
           <router-view ></router-view>
         </transition>
       </div>
@@ -23,35 +21,7 @@ export default {
     appHeader: Header,
     appFooter: Footer,
   },
-  // created: function() {
-  //   this.$store.dispatch("initStocks");
-  //   this.$store.state.foo = "goo";
-  // },
-  // data: function() {
-  //   return {
-  //     authenticated: false,
-  //     mockAccount: {
-  //       username: "aaa",
-  //       password: "bbb",
-  //     },
-  //   };
-  // },
-  // methods: {
-  //   setAuthenticated(status) {
-  //     this.authenticated = status;
-  //   },
-  //   logout() {
-  //     this.authenticated = false;
-  //   },
-  // },
   watch: {
-    // authenticated: function() {
-    //   if (this.authenticated == false) {
-    //     this.$router.replace({ name: "login" });
-    //   } else {
-    //     this.$router.replace({ name: "secure" });
-    //   }
-    // },
     //see https://stackoverflow.com/questions/54870454/watching-a-vuex-store
     '$store.state.auth.token'(value, oldValue) {
       console.log("xyxeee", value, oldValue);
