@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 import stocks from './modules/stocks.js';
 import portfolio from './modules/portfolio.js';
 import auth from './modules/auth.js'
+import general from './modules/general.js'
 
 import * as actions from './actions';
 
@@ -14,7 +15,8 @@ export const store = new Vuex.Store({
   modules: {
     stocks,
     portfolio,
-    auth
+    auth,
+    general
   }
 })
 

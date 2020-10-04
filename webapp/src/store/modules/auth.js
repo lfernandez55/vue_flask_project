@@ -5,9 +5,10 @@ const state = {
   username: "",
   email: "",
   firstName: "",
-  lastName: "",
-  fetchStatus: "",
-  flashMessage: ""
+  lastName: ""
+  // ,
+  // fetchStatus: "",
+  // flashMessage: ""
 }
 
 const mutations = {
@@ -24,13 +25,14 @@ const mutations = {
   },
   SET_FOO: function (state, resp) {
     console.log("in SET_FOO", resp)
-  },
-  SET_FETCH_STATUS: function (state, payload) {
-    console.log("in SET_FETCH_STATUS", payload)
-    state.fetchStatus = payload.status;
-    state.flashMessage = payload.flashMessage;
-    setTimeout(()=>{state.flashMessage = ""; console.log("in settimeout")},3000)
   }
+  // ,
+  // SET_FETCH_STATUS: function (state, payload) {
+  //   console.log("in SET_FETCH_STATUS", payload)
+  //   state.fetchStatus = payload.status;
+  //   state.flashMessage = payload.flashMessage;
+  //   setTimeout(()=>{state.flashMessage = ""; console.log("in settimeout")},3000)
+  // }
 }
 
 const actions = {

@@ -2,15 +2,15 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <transition name="slide" mode="out-in">
-        <div id="flash" v-show="this.$store.state.auth.flashMessage != ''">
-          {{this.$store.state.auth.flashMessage}}
+        <div id="flash" v-show="this.$store.state.general.flashMessage != ''">
+          {{this.$store.state.general.flashMessage}}
         </div>
       </transition>
       <div class="navbar-header">
         <router-link to="/" class="navbar-brand">Vue-Flask App</router-link>
       </div>
       <div @click="hideMe">Hide ME</div>
-       <!-- {{$store.state.auth.flashMessage}}  -->
+       <!-- {{$store.state.general.flashMessage}}  -->
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <router-link tag="li" to="/secure" active-class="active"
