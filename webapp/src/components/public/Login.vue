@@ -5,7 +5,7 @@
       <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
         <h2>Login</h2>
 
-        <h4>{{ msg }}</h4>
+        <!-- <h4>{{ msg }}</h4> -->
         <div class="form-group  ">
           <label for="login" class="control-label">Login name</label>
 
@@ -96,6 +96,7 @@ export default {
       } else {
         this.msg = "A username and password must be present";
         console.log("A username and password must be present");
+        this.$store.commit('SET_FETCH_STATUS', { status: 'error', flashMessage: 'A username and password must be present' })
       }
     },
   },

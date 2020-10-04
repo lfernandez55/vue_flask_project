@@ -1,14 +1,14 @@
 <template>
   <div id="secure">
-    <h1>Secure Area</h1>
+    <!-- <h1>Secure Area</h1>
     <p>Token: {{ this.$store.state.auth.token }}</p>
     <p>Token with getter: {{ this.$store.getters.token }}</p>
     <p>Authenticated: {{ this.$store.getters.authenticated }}</p>
-    <hr>
-    <h3>Welcome: </h3>
-    <p>{{ this.$store.state.auth.firstName }}</p>
+    <hr> -->
+    <h2>Welcome {{ this.$store.state.auth.firstName }} {{ this.$store.state.auth.lastName }}!</h2>
+    <!-- <p>{{ this.$store.state.auth.firstName }}</p>
     <p>{{ this.$store.state.auth.lastName }}</p>
-    <p>{{ this.$store.state.auth.email }}</p>
+    <p>{{ this.$store.state.auth.email }}</p> -->
   </div>
 </template>
 

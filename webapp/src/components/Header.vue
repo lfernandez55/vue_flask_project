@@ -9,8 +9,8 @@
       <div class="navbar-header">
         <router-link to="/" class="navbar-brand">Vue-Flask App</router-link>
       </div>
-      <!-- {{$store.state.general.flashMessage}}  --> 
-      <!-- {{this.$store.state.general.fetchStatus}} -->
+      <!-- {{$store.state.general.flashMessage}}
+      {{this.$store.state.general.fetchStatus}} -->
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <router-link tag="li" to="/secure" active-class="active"
@@ -57,31 +57,7 @@ export default {
     },
     profile: function() {
       this.$router.replace({ name: "profile" });
-    },
-    saveData: function() {
-      const data = {
-        funds: this.$store.getters.funds,
-        stockPortfolio: this.$store.getters.stockPortfolio,
-        stocks: this.$store.getters.stocks,
-      };
-      let headerObj = {
-        headers: {
-          "Content-Type": "text/plain",
-          Authorization:
-            "Basic " + btoa(this.$store.state.auth.token + ":" + "whatever"),
-        },
-      };
-      console.log(data);
-      this.$http
-        .put("http://127.0.0.1:5000/profile", data, headerObj)
-        .then((response) => {
-          console.log(response);
-        }),
-        (error) => {
-          console.log(error);
-          alert("an error occurred");
-        };
-    },
+    }
   },
 };
 
