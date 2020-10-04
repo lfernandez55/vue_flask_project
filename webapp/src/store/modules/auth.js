@@ -36,7 +36,48 @@ const mutations = {
 }
 
 const actions = {
+  login: (context, loginInfo) => {
+    let headerObj = {
+      headers: {
+        "Content-Type": "text/plain",
+        Authorization:
+          "Basic " + btoa(loginInfo.username + ":" + loginInfo.password),
+      },
+    };
+    Vue.http
+      .get("api/token", headerObj)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          console.log(data);
+          if (data.token) {
+            console.log("here1")
+            // this.$router.replace({ name: "secure" });
+            context.dispatch("setToken", data.token);
+          }
+        }
+      })
+      .catch((err) => {
+        if (err.body.error == "Unauthorized access") {
+          let payload = {
+            status: err,
+            flashMessage: 'Unable to log in. Either the username or the password was incorrect. Please try again.'
+          }
+          context.commit('SET_FETCH_STATUS',payload);
+        } else {
+          console.log("Error: " + err.message);
+          let payload = {
+            status: err,
+            flashMessage: 'Something went wrong'
+          }
+          context.commit('SET_FETCH_STATUS',payload);
+        }
+      });
+  },
+
+
   setToken: ({ commit }, tokenStr) => {
+    console.log("now here 231")
     commit('SET_TOKEN', tokenStr)
   },
   loadAccountData: ({ commit }) => {
