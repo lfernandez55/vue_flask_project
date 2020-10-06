@@ -12,6 +12,7 @@ const mutations = {
       state.fetchStatus = payload.status;
       state.flashMessage = payload.flashMessage;
       setTimeout(()=>{state.flashMessage = ""; console.log("in settimeout")},3000)
+      // setTimeout(()=>{state.fetchStatus = ""; console.log("in settimeout")},3000)
     }
   }
   
