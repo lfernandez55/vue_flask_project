@@ -2,8 +2,8 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <transition name="slide" mode="out-in">
-        <div id="flash" v-show="this.$store.state.general.flashMessage != ''" v-bind:style="myStyle">
-          {{ this.$store.state.general.flashMessage }}
+        <div id="flash" v-show="this.$store.state.general.flashMessage != ''"   v-bind:class="classObject" role="alert">
+            {{ this.$store.state.general.flashMessage }}
         </div>
       </transition>
       <div class="navbar-header">
@@ -39,17 +39,17 @@ export default {
     };
   },
   computed: {
-    myStyle: function() {
-      if (this.$store.state.general.fetchStatus == "success") {
-        return {
-          backgroundColor: "#33FF66",
-        };
-      } else {
-        return {
-          backgroundColor: "#FF6666",
-        };
-      }
-    },
+    classObject: function () {
+    return {
+      'alert': true,
+      'alert-success': this.$store.state.general.fetchStatus == "success",
+      'alert-danger': this.$store.state.general.fetchStatus == "danger" ||
+      (this.$store.state.general.fetchStatus != "success" 
+      && this.$store.state.general.fetchStatus != "danger" 
+      && this.$store.state.general.fetchStatus != "info"),
+      'alert-info': this.$store.state.general.fetchStatus == "info"
+    }
+  }
   },
   methods: {
     logOut: function() {
@@ -70,8 +70,8 @@ export default {
   width: 40%;
   margin-left: auto;
   margin-right: auto;
-  background-color: greenyellow;
-  border-radius: 10px;
+  /* background-color: greenyellow;
+  border-radius: 10px; */
   position: absolute;
   left: 0;
   right: 0;
