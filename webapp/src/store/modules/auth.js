@@ -27,8 +27,8 @@ const mutations = {
     console.log("in SET_FOO", resp)
   }
   // ,
-  // SET_FETCH_STATUS: function (state, payload) {
-  //   console.log("in SET_FETCH_STATUS", payload)
+  // SET_ALERT: function (state, payload) {
+  //   console.log("in SET_ALERT", payload)
   //   state.alertType = payload.status;
   //   state.alertMsg = payload.alertMsg;
   //   setTimeout(()=>{state.alertMsg = ""; console.log("in settimeout")},3000)
@@ -63,14 +63,14 @@ const actions = {
             status: err,
             alertMsg: 'Unable to log in. Either the username or the password was incorrect. Please try again.'
           }
-          context.commit('SET_FETCH_STATUS',payload);
+          context.commit('SET_ALERT',payload);
         } else {
           console.log("Error: " + err.message);
           let payload = {
             status: err,
             alertMsg: 'Something went wrong'
           }
-          context.commit('SET_FETCH_STATUS',payload);
+          context.commit('SET_ALERT',payload);
         }
       });
   },
@@ -135,13 +135,13 @@ const actions = {
               status: resp.error,
               alertMsg: 'Darn.  Something went wrong!'
             }
-            commit('SET_FETCH_STATUS',payload);
+            commit('SET_ALERT',payload);
           }else{
             let payload = {
               status: 'success',
               alertMsg: 'Profile updated!'
             }
-            commit('SET_FETCH_STATUS',payload);
+            commit('SET_ALERT',payload);
           }
           
         })
@@ -151,7 +151,7 @@ const actions = {
             status: err,
             alertMsg: 'Something went wrong'
           }
-          commit('SET_FETCH_STATUS',payload);
+          commit('SET_ALERT',payload);
         });
   },
 }

@@ -96,7 +96,7 @@ export default {
       } else {
         this.msg = "A username and password must be present";
         console.log("A username and password must be present");
-        this.$store.commit('SET_FETCH_STATUS', { status: 'error', alertMsg: 'A username and password must be present' })
+        this.$store.commit('SET_ALERT', { status: 'error', alertMsg: 'A username and password must be present' })
       }
     },
   },

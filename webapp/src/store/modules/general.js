@@ -8,8 +8,8 @@ const state = {
 
 
 const mutations = {
-    SET_FETCH_STATUS: function (state, payload) {
-      console.log("in SET_FETCH_STATUS", payload)
+    SET_ALERT: function (state, payload) {
+      console.log("in SET_ALERT", payload)
       state.alertType = payload.status;
       state.alertMsg = payload.alertMsg;
       state.displayAlert = true;
