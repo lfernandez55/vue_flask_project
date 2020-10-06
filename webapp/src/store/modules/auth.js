@@ -7,8 +7,8 @@ const state = {
   firstName: "",
   lastName: ""
   // ,
-  // fetchStatus: "",
-  // flashMessage: ""
+  // alertType: "",
+  // alertMsg: ""
 }
 
 const mutations = {
@@ -29,9 +29,9 @@ const mutations = {
   // ,
   // SET_FETCH_STATUS: function (state, payload) {
   //   console.log("in SET_FETCH_STATUS", payload)
-  //   state.fetchStatus = payload.status;
-  //   state.flashMessage = payload.flashMessage;
-  //   setTimeout(()=>{state.flashMessage = ""; console.log("in settimeout")},3000)
+  //   state.alertType = payload.status;
+  //   state.alertMsg = payload.alertMsg;
+  //   setTimeout(()=>{state.alertMsg = ""; console.log("in settimeout")},3000)
   // }
 }
 
@@ -61,14 +61,14 @@ const actions = {
         if (err.body.error == "Unauthorized access") {
           let payload = {
             status: err,
-            flashMessage: 'Unable to log in. Either the username or the password was incorrect. Please try again.'
+            alertMsg: 'Unable to log in. Either the username or the password was incorrect. Please try again.'
           }
           context.commit('SET_FETCH_STATUS',payload);
         } else {
           console.log("Error: " + err.message);
           let payload = {
             status: err,
-            flashMessage: 'Something went wrong'
+            alertMsg: 'Something went wrong'
           }
           context.commit('SET_FETCH_STATUS',payload);
         }
@@ -133,13 +133,13 @@ const actions = {
           if(resp.error){
             let payload = {
               status: resp.error,
-              flashMessage: 'Darn.  Something went wrong!'
+              alertMsg: 'Darn.  Something went wrong!'
             }
             commit('SET_FETCH_STATUS',payload);
           }else{
             let payload = {
               status: 'success',
-              flashMessage: 'Profile updated!'
+              alertMsg: 'Profile updated!'
             }
             commit('SET_FETCH_STATUS',payload);
           }
@@ -149,7 +149,7 @@ const actions = {
           alert("Error: " + err.message);
           let payload = {
             status: err,
-            flashMessage: 'Something went wrong'
+            alertMsg: 'Something went wrong'
           }
           commit('SET_FETCH_STATUS',payload);
         });

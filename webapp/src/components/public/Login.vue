@@ -57,7 +57,7 @@ export default {
   watch: {
     "$store.state.auth.token"(value) {
       if (value != "") {
-        // this.$store.state.general.fetchStatus = "";
+        // this.$store.state.general.alertType = "";
         this.$router.replace({ name: "secure" });
       }
     },
@@ -96,7 +96,7 @@ export default {
       } else {
         this.msg = "A username and password must be present";
         console.log("A username and password must be present");
-        this.$store.commit('SET_FETCH_STATUS', { status: 'error', flashMessage: 'A username and password must be present' })
+        this.$store.commit('SET_FETCH_STATUS', { status: 'error', alertMsg: 'A username and password must be present' })
       }
     },
   },

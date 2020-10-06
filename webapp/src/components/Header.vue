@@ -3,15 +3,15 @@
     <div class="container-fluid">
       <!-- <transition name="slide" mode="out-in"> -->
       <transition name="fade" > 
-        <div id="flash" v-if="this.$store.state.general.messageTrigger"   v-bind:class="classObject" role="alert">
-            {{ this.$store.state.general.flashMessage }}
+        <div id="flash" v-if="this.$store.state.general.displayAlert"   v-bind:class="classObject" role="alert">
+            {{ this.$store.state.general.alertMsg }}
         </div>
       </transition>
       <div class="navbar-header">
         <router-link to="/" class="navbar-brand">Vue-Flask App</router-link>
       </div>
-      <!-- {{$store.state.general.flashMessage}}
-      {{this.$store.state.general.fetchStatus}} -->
+      <!-- {{$store.state.general.alertMsg}}
+      {{this.$store.state.general.alertType}} -->
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <router-link tag="li" to="/secure" active-class="active"
@@ -43,20 +43,20 @@ export default {
     classObject: function () {
       return {
         'alert': true,
-        'alert-success': this.$store.state.general.fetchStatus == "success",
-        'alert-danger': this.$store.state.general.fetchStatus == "danger" ||
-        (this.$store.state.general.fetchStatus != "success" 
-        && this.$store.state.general.fetchStatus != "danger" 
-        && this.$store.state.general.fetchStatus != "info"),
-        'alert-info': this.$store.state.general.fetchStatus == "info"
+        'alert-success': this.$store.state.general.alertType == "success",
+        'alert-danger': this.$store.state.general.alertType == "danger" ||
+        (this.$store.state.general.alertType != "success" 
+        && this.$store.state.general.alertType != "danger" 
+        && this.$store.state.general.alertType != "info"),
+        'alert-info': this.$store.state.general.alertType == "info"
       }
     }
   },
   // this is needed for the fade effect
   watch: {
-    "$store.state.general.messageTrigger"(val) {
+    "$store.state.general.displayAlert"(val) {
         if (val===true){
-          setTimeout(()=>this.$store.state.general.messageTrigger=false,5000);
+          setTimeout(()=>this.$store.state.general.displayAlert=false,5000);
         } 
         
     }
