@@ -1,13 +1,12 @@
 <template>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <button @click="tog">debug</button>{{toggle}}
       <!-- <transition name="slide" mode="out-in"> -->
-      <!-- <transition name="fade" mode="out-in">  -->
+      <transition name="fade" > 
         <div id="flash" v-if="this.$store.state.general.messageTrigger"   v-bind:class="classObject" role="alert">
             {{ this.$store.state.general.flashMessage }}
         </div>
-      <!-- </transition> -->
+      </transition>
       <div class="navbar-header">
         <router-link to="/" class="navbar-brand">Vue-Flask App</router-link>
       </div>
@@ -33,7 +32,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -62,7 +60,6 @@ export default {
         } 
         
     }
-
   }, 
   methods: {
     logOut: function() {
@@ -70,62 +67,29 @@ export default {
     },
     profile: function() {
       this.$router.replace({ name: "profile" });
-    },
-    tog: function(){
-      this.toggle = false;
     }
+
   },
 };
-
 </script>
 
 <style scoped>
-
 #flash {
   text-align: center;
   width: 40%;
   margin-left: auto;
   margin-right: auto;
-  /* background-color: greenyellow;
-  border-radius: 10px; */
   position: absolute;
   left: 0;
   right: 0;
   top: 40px;
   z-index: 10;
-
-   opacity: 0;
-   animation-delay: 1s;
-   -webkit-animation: arrowInOut 5s linear forwards;
-   animation: arrowInOut 5s linear forwards; 
-
 }
-
-/* .fade-enter-active, .fade-leave-active {
+.fade-enter-active, .fade-leave-active {
   transition: opacity 1.3s ease;
 }
-
 .fade-enter, .fade-leave-to {
   opacity: 0;
-} */
-
-
-
-
-/* @-webkit-keyframes arrowInOut {
- 0%,100% {opacity: 0;}
- 30%, 80% {opacity: 1;}
 }
-@keyframes arrowInOut {
- 0%,100% {opacity: 0;}
- 30%, 80% {opacity: 1;}
- }
- */
-@keyframes arrowInOut {
-  0%   {opacity: 0;}
-  30%  {opacity: 1;}
-  80%  {opacity: 1;}
-  100% {opacity: 0;}
-} 
 
 </style>
