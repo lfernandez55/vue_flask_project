@@ -3,11 +3,11 @@
     <div class="container-fluid">
       <button @click="tog">debug</button>{{toggle}}
       <!-- <transition name="slide" mode="out-in"> -->
-      <transition name="fade" mode="out-in"> 
+      <!-- <transition name="fade" mode="out-in">  -->
         <div id="flash" v-if="this.$store.state.general.messageTrigger"   v-bind:class="classObject" role="alert">
             {{ this.$store.state.general.flashMessage }}
         </div>
-      </transition>
+      <!-- </transition> -->
       <div class="navbar-header">
         <router-link to="/" class="navbar-brand">Vue-Flask App</router-link>
       </div>
@@ -94,20 +94,20 @@ export default {
   top: 40px;
   z-index: 10;
 
-   /* opacity: 0;
+   opacity: 0;
    animation-delay: 1s;
-   -webkit-animation: arrowInOut 8s linear forwards;
-   animation: arrowInOut 5s linear forwards;  */
+   -webkit-animation: arrowInOut 5s linear forwards;
+   animation: arrowInOut 5s linear forwards; 
 
 }
 
-.fade-enter-active, .fade-leave-active {
+/* .fade-enter-active, .fade-leave-active {
   transition: opacity 1.3s ease;
 }
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
-}
+} */
 
 
 
@@ -121,11 +121,11 @@ export default {
  30%, 80% {opacity: 1;}
  }
  */
-/* @keyframes arrowInOut {
+@keyframes arrowInOut {
   0%   {opacity: 0;}
   30%  {opacity: 1;}
   80%  {opacity: 1;}
   100% {opacity: 0;}
-}  */
+} 
 
 </style>
