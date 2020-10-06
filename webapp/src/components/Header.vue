@@ -1,14 +1,11 @@
 <template>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
+      <button @click="tog">debug</button>{{toggle}}
       <!-- <transition name="slide" mode="out-in"> -->
-      <transition 
-      enter-active-class="animate__animated animate__fadeIn animate__slow"
-      leave-active-class="animate__animated animate__fadeOut animate__slow"
-      >  
-        <div id="flash" v-show="this.$store.state.general.flashMessage != ''"   v-bind:class="classObject" role="alert">
-            <!-- {{ this.$store.state.general.flashMessage }} -->
-            {{msg}}
+      <transition name="fade" mode="out-in"> 
+        <div id="flash" v-if="this.$store.state.general.messageTrigger"   v-bind:class="classObject" role="alert">
+            {{ this.$store.state.general.flashMessage }}
         </div>
       </transition>
       <div class="navbar-header">
@@ -41,7 +38,7 @@ export default {
   data() {
     return {
       isDropdownOpen: false,
-      msg: ""
+      toggle: false
     };
   },
   computed: {
@@ -59,16 +56,13 @@ export default {
   },
   // this is needed for the fade effect
   watch: {
-    "$store.state.general.flashMessage"(newVar ) {
-              if (newVar == ""){
-                setTimeout(function(){
-                    this.msg=newVar;
-                },1000);
-              }
-              else{
-                this.msg=newVar;
-              }
-    },
+    "$store.state.general.messageTrigger"(val) {
+        if (val===true){
+          setTimeout(()=>this.$store.state.general.messageTrigger=false,5000);
+        } 
+        
+    }
+
   }, 
   methods: {
     logOut: function() {
@@ -76,6 +70,9 @@ export default {
     },
     profile: function() {
       this.$router.replace({ name: "profile" });
+    },
+    tog: function(){
+      this.toggle = false;
     }
   },
 };
@@ -97,6 +94,38 @@ export default {
   top: 40px;
   z-index: 10;
 
+   /* opacity: 0;
+   animation-delay: 1s;
+   -webkit-animation: arrowInOut 8s linear forwards;
+   animation: arrowInOut 5s linear forwards;  */
+
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1.3s ease;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+
+
+
+/* @-webkit-keyframes arrowInOut {
+ 0%,100% {opacity: 0;}
+ 30%, 80% {opacity: 1;}
+}
+@keyframes arrowInOut {
+ 0%,100% {opacity: 0;}
+ 30%, 80% {opacity: 1;}
+ }
+ */
+/* @keyframes arrowInOut {
+  0%   {opacity: 0;}
+  30%  {opacity: 1;}
+  80%  {opacity: 1;}
+  100% {opacity: 0;}
+}  */
 
 </style>
