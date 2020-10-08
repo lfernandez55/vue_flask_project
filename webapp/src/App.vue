@@ -28,7 +28,7 @@ export default {
       if (value == ""){
         this.$router.replace({ name: "login" });
       } else {
-        this.$router.replace({ name: "secure" });
+        this.$router.replace({ name: "home" });
       }
       },
     '$store.state.general.newRouteRequest'(value) {

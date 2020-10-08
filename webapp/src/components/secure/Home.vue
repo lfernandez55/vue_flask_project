@@ -1,5 +1,6 @@
 <template>
-  <div id="secure">
+  <div id="home">
+    <h1>Home</h1>
     <!-- <h1>Secure Area</h1>
     <p>Token: {{ this.$store.state.auth.token }}</p>
     <p>Token with getter: {{ this.$store.getters.token }}</p>
@@ -14,7 +15,7 @@
 
 <script>
 export default {
-  name: "Secure",
+  name: "Home",
   data() {
     return {
       userName: "",

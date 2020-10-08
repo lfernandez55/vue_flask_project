@@ -54,45 +54,10 @@ export default {
       msg: "",
     };
   },
-  watch: {
-    // "$store.state.auth.token"(value) {
-    //   if (value != "") {
-    //     // this.$store.state.general.alertType = "";
-    //     this.$router.replace({ name: "secure" });
-    //   }
-    // },
-  },
   methods: {
     login() {
       if (this.input.username != "" && this.input.password != "") {
         this.$store.dispatch("login", this.input);
-        // let headerObj = {
-        //   headers: {
-        //     "Content-Type": "text/plain",
-        //     Authorization:
-        //       "Basic " + btoa(this.input.username + ":" + this.input.password),
-        //   },
-        // };
-        // this.$http
-        //   .get("api/token", headerObj)
-        //   .then((response) => response.json())
-        //   .then((data) => {
-        //     if (data) {
-        //       console.log(data);
-        //       if (data.token) {
-        //         //this.$emit("authenticated", true);
-        //         this.$router.replace({ name: "secure" });
-        //         this.$store.dispatch("setToken", data.token);
-        //       }
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     if (err.body.error == "Unauthorized access") {
-        //       this.msg = err.body.error;
-        //     } else {
-        //       console.log("Error: " + err.message);
-        //     }
-        //   });
       } else {
         this.msg = "A username and password must be present";
         console.log("A username and password must be present");

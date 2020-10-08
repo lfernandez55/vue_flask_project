@@ -2,12 +2,12 @@
 import Portfolio from './components/portfolio/Portfolio.vue'
 import Stocks from './components/stocks/Stocks.vue'
 import Login from './components/public/Login.vue'
-import Secure from './components/secure/Secure.vue'
+import Home from './components/secure/Home.vue'
 import Profile from './components/profile/Profile.vue'
 import Debug from './components/public/Debug.vue'
 
 export const routes = [
-  {path: '/', component: Secure, name: 'secure',meta: {
+  {path: '/', component: Home, name: 'home',meta: {
     breadcrumb: [
       { name: 'Home' }
     ]

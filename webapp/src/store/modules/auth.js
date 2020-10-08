@@ -52,7 +52,6 @@ const actions = {
           console.log(data);
           if (data.token) {
             console.log("here1")
-            // this.$router.replace({ name: "secure" });
             context.dispatch("setToken", data.token);
           }
         }
@@ -140,7 +139,7 @@ const actions = {
             let payload = {
               status: 'success',
               alertMsg: 'Profile updated!',
-              newRouteRequest: 'secure'
+              newRouteRequest: 'home'
             }
             commit('SET_ALERT',payload);
           }
