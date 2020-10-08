@@ -22,7 +22,12 @@ export default {
     };
   },
   mounted: function() {
-    this.$store.dispatch('loadAccountData')
+    if (this.$store.state.auth.token != ""){
+      this.$store.dispatch('loadAccountData')
+    }else{
+      this.$router.replace({ name: "login" });
+    }
+    
   },
   methods: {
 
