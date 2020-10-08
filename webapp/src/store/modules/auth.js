@@ -139,7 +139,8 @@ const actions = {
           }else{
             let payload = {
               status: 'success',
-              alertMsg: 'Profile updated!'
+              alertMsg: 'Profile updated!',
+              newRouteRequest: 'secure'
             }
             commit('SET_ALERT',payload);
           }

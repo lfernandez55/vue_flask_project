@@ -14,7 +14,7 @@ export const routes = [
   }},
   {path: '/portfolio', component: Portfolio, name: 'portfolio'},
   {path: '/stocks', component: Stocks, name: 'stocks'},
-  // {path: '/login', component: Login, name: 'login'},
+  {path: '/login', component: Login, name: 'login'},
   {path: '/secure', component: Secure, name: 'secure',      meta: {
     breadcrumb: [
       { name: 'Home', link: '/' },

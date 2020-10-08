@@ -28,7 +28,16 @@ export default {
       if (value == ""){
         this.$router.replace({ name: "login" });
       }
+      },
+    '$store.state.general.newRouteRequest'(value) {
+      console.log("watch in app.vue", value);
+      console.log("watch in app.vue2", this.$store.state.general.newRouteRequest);
+      if (value != ""){
+        this.$router.replace({ name: value});
+        // this.$store.state.general.newRouteRequest = "";
+        this.$store.commit('CLEAR_NEW_ROUTE_REQ')
       }
+      },
   }
 };
 </script>

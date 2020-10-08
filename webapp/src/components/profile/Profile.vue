@@ -72,12 +72,26 @@ export default {
     },
   },
   watch: {
-    "$store.state.general.alertType"(value) {
-      if (value == "success") {
-        // this.$store.state.general.alertType = "";
-        this.$router.replace({ name: "secure" });
-      }
-    },
+    // "$store.state.general.alertType"(value) {
+    //   if (value == "success") {
+    //     // this.$store.state.general.alertType = "";
+    //     console.log("HERE I AM")
+    //     this.$router.replace({ name: "secure" });
+    //   }else{
+    //     console.log("NOT HERE")
+    //   }
+    // },
+    // "$store.state.general.displayAlert"() {
+    //   if (this.$store.state.general.displayAlert == true) {
+    //     if (this.$store.state.general.alertType == "success") {
+    //       // this.$store.state.general.alertType = "";
+    //       console.log("HERE I AM")
+    //       this.$router.replace({ name: "secure" });
+    //     }else{
+    //       console.log("NOT HERE")
+    //     }
+    //   }
+    // },
   },
 };
 </script>
