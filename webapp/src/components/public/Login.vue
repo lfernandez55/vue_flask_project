@@ -55,12 +55,12 @@ export default {
     };
   },
   watch: {
-    "$store.state.auth.token"(value) {
-      if (value != "") {
-        // this.$store.state.general.alertType = "";
-        this.$router.replace({ name: "secure" });
-      }
-    },
+    // "$store.state.auth.token"(value) {
+    //   if (value != "") {
+    //     // this.$store.state.general.alertType = "";
+    //     this.$router.replace({ name: "secure" });
+    //   }
+    // },
   },
   methods: {
     login() {

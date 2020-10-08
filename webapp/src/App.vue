@@ -27,6 +27,8 @@ export default {
       console.log("xyxeee", value, oldValue);
       if (value == ""){
         this.$router.replace({ name: "login" });
+      } else {
+        this.$router.replace({ name: "secure" });
       }
       },
     '$store.state.general.newRouteRequest'(value) {
