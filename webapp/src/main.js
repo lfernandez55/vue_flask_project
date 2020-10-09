@@ -52,7 +52,7 @@ router.beforeEach((to, from, next) => {
     if ( found == true){
       next()
     }else{
-      next({ name: 'login' })
+      next({ name: 'warning' })
     }
   }else{
     next()

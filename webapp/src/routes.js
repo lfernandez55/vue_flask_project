@@ -1,7 +1,7 @@
 import Login from './components/public/Login.vue'
 import Home from './components/secure/Home.vue'
 import Profile from './components/profile/Profile.vue'
-import Debug from './components/public/Debug.vue'
+import Warning from './components/public/Warning.vue'
 
 import Admin from './components/secure/Admin.vue'
 import Member from './components/secure/Member.vue'
@@ -9,6 +9,8 @@ import Agent from './components/secure/Agent.vue'
 
 import Users from './components/secure/admin/Users.vue'
 import Roles from './components/secure/admin/Roles.vue'
+
+
 
 export const routes = [
   {
@@ -27,7 +29,7 @@ export const routes = [
       ]
     }
   },
-  { path: '/debug', component: Debug, name: 'debug' }, 
+  // { path: '/debug', component: Debug, name: 'debug' }, 
   {
     path: '/admin', component: Admin, name: 'admin', meta: {
       breadcrumb: [
@@ -63,7 +65,9 @@ export const routes = [
 
   },
   { path: '/member', component: Member, name: 'member' },
-  { path: '/agent', component: Agent, name: 'agent' }
+  { path: '/agent', component: Agent, name: 'agent' },
+
+  { path: '/unauthorized', component: Warning, name: 'warning' }
 ];
 
 
