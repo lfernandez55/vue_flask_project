@@ -5,7 +5,8 @@ const state = {
   username: "",
   email: "",
   firstName: "",
-  lastName: ""
+  lastName: "",
+  roles: []
   // ,
   // alertType: "",
   // alertMsg: ""
@@ -21,6 +22,8 @@ const mutations = {
     state.email = resp.email;
     state.firstName = resp.firstname;
     state.lastName = resp.lastname;
+    //converting array of objects into array of role names
+    state.roles = resp.roles.map((obj)=>{return obj.name})
     console.log("state:", state)
   },
   SET_FOO: function (state, resp) {

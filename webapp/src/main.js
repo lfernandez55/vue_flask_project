@@ -40,6 +40,26 @@ const router = new VueRouter({
   routes,
 });
 
+// router.beforeEach((to, from, next) => {
+//   console.log('beforeEach', to, from)
+//   console.log("AAAAAAAAAAAAAAAa")
+//   console.log(to.meta.requiredRoles)
+//   console.log("BBBBBBBBBBBBBB")
+//   console.log(store.state.auth.roles)
+//   console.log("ZZZZZZZZZZZZZzzzzzzz")
+//   if (to.meta.requiredRoles){
+//     const found = to.meta.requiredRoles.some(r=> store.state.auth.roles.includes(r))
+//     if ( found == true){
+//       next()
+//     }else{
+//       next({ name: 'login' })
+//     }
+//   }else{
+//     next()
+//   }
+// })
+
+
 new Vue({
   render: (h) => h(App),
   router,

@@ -70,10 +70,13 @@ def get_resource():
 # @auth.login_required(role='admin')
 @auth.login_required
 def get_account():
+    print('roles')
+    print(jsonify(g.user.roles))
     return jsonify({ \
         'username': g.user.username, \
         'email': g.user.email, \
-        'firstname': g.user.firstname, 'lastname': g.user.lastname \
+        'firstname': g.user.firstname, 'lastname': g.user.lastname, \
+        'roles': g.user.roles
     })
 
 @app.route('/api/profile', methods=['PUT'])
@@ -99,9 +102,17 @@ def profile():
     userObj2 = User.query.filter(User.username == g.user.username).first()
     print("marker")
     # print(userObj2)
-    return jsonify(objCopy)
+    # return jsonify(objCopy)
     # return make_response(jsonify({'error': 'Unauthorized access'}), 403)
 
+    return jsonify({ \
+        'username': g.user.username, \
+        'email': g.user.email, \
+        'firstname': g.user.firstname, 'lastname': g.user.lastname, \
+        'roles': g.user.roles
+    })
+
+    
 # See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 # search on 401 replacing with 403
 @auth.error_handler
