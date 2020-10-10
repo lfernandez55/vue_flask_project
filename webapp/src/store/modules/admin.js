@@ -84,13 +84,14 @@ const actions = {
   },
 //   getUsers3: ({ commit }) => {
     //below from loadaccountdata but isn't working
-    getUsers3: ({ commit, rootState }) => {
-        console.log("in getuser3", rootState.auth.token)
+    // getUsers3: ({ commit, rootState }) => {
+    getUsers3: (context) => { 
+        console.log("in getuser3", context.rootState.auth.token)
         let headerObj = {
           headers: {
             "Content-Type": "text/plain",
             Authorization:
-              "Basic " + btoa(rootState.auth.token + ":" + "whatever"),
+              "Basic " + btoa(context.rootState.auth.token + ":" + "whatever"),
           },
         };
         Vue.http
@@ -99,7 +100,7 @@ const actions = {
           .then((resp) => {
             if (resp) {
               console.log("in actions.jsxxxx", resp)
-              commit('SET_USERS', resp)
+              context.commit('SET_USERS', resp)
             }
           })
           .catch((err) => {
