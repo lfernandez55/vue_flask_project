@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 
 import auth from './modules/auth.js'
 import general from './modules/general.js'
+import admin from './modules/admin.js'
 
 import * as actions from './actions';
 
@@ -13,7 +14,8 @@ export const store = new Vuex.Store({
   actions,
   modules: {
     auth,
-    general
+    general,
+    admin
   }
 })
 

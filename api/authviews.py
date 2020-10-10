@@ -44,6 +44,14 @@ def new_user():
             {'Location': url_for('get_user', id=user.id, _external=True)})
 
 
+@app.route('/api/admin/users')
+@auth.login_required
+def user_list():
+    users = User.query.all()
+    return jsonify(users)
+    # return jsonify({'foo': 'from admin/users'})
+
+
 @app.route('/api/users/<int:id>')
 def get_user(id):
     user = User.query.get(id)
@@ -112,12 +120,12 @@ def profile():
         'roles': g.user.roles
     })
 
-    
+
 # See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
 # search on 401 replacing with 403
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'error': 'Unauthorized access'}), 403)
+    return make_response(jsonify({'error': 'Unauthorized accessx'}), 403)
 
 
 @app.route('/api/testrole')
