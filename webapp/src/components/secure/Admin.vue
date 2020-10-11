@@ -1,12 +1,12 @@
 <template>
   <div id="admin">
     <h1>Admin Component</h1>
-    <ul class="nav nav-pills">
+    <ul class="nav nav-tabs">
         <router-link
         to="/admin/users"
         tag="li"
         active-class="active"
-        exact
+        
         ><a>Users</a></router-link>
         <router-link
         to="/admin/roles"

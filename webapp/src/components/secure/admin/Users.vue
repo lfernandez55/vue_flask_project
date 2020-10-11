@@ -1,12 +1,38 @@
 <template>
   <div id="admin">
-    <h1>Users Component</h1>
-    <!-- {{this.$store.state.admin.users}} -->
-    <ul class="list-group">
-      <li v-for="user in this.$store.state.admin.users" :key="user.id">
-          {{ user.firstname }} {{ user.lastname }} {{ user.email }}
-        </li>
-    </ul>
+    <!-- {{this.$store.state.admin.users}}  -->
+    <div class="text-right top_div">
+      <a class="btn btn-default btn-primary" href="">Create User</a>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Roles</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in this.$store.state.admin.users" :key="user.id">
+          <td>{{ user.firstname }}</td>
+          <td>{{ user.lastname }}</td>
+          <td>{{ user.email }}</td>
+          <td>Todo</td>
+
+          <td>
+            <router-link to="/admin/users/edit" tag="a"
+              ><a>edit</a></router-link
+            >
+          </td>
+
+          <td><a href="user.id">delete</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -14,8 +40,7 @@
 export default {
   name: "Admin",
   data() {
-    return {
-    };
+    return {};
   },
   mounted: function() {
     // this.$store.dispatch("loadAccountData");
@@ -27,5 +52,7 @@ export default {
 </script>
 
 <style scoped>
-
+.top_div {
+  margin-top: 10px;
+}
 </style>
