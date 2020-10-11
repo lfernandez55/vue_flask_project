@@ -1,10 +1,30 @@
-Backend derived from:
-3200_flask_books_login_accesscontrol_all_sqlalchemy
 
-# 3200_flask_basic_user_books_with_login_accesscontrol
+This api build on top of flask-httpauth
+See: https://flask-httpauth.readthedocs.io/en/latest/
 
-This app builds on top of https://flask-user.readthedocs.io/en/latest/basic_app.html 
-to create the Books site with login and rudimentary access control.  Per the basic app 
-you have to install Babel, Flask-User and SQLAlchemy. Unlike the git repo flask_book_plus_auth 
-it just uses SQLAlchemy.  No need for the older connectors we used from Pluralsight.  However, 
-the addbook feature is still missing as is the categories link.
+API routes:
+
+General desc:  Return token for token based authorization
+Request headers: Basic authorization, username and password.
+Returns token
+GET 
+http://127.0.0.1:5000/api/token
+
+General desc: Returns user's account data
+Request headers: Basic auth with token*
+Returns user's basic account data in json format
+GET
+http://127.0.0.1:5000/api/account
+
+General desc: Updates user's firstname and/or lastname
+Request headers: Basic auth with token*
+Returns user's basic account data in json format
+PUT
+http://127.0.0.1:5000/api/profile
+
+General desc: Returns list of all users
+Request headers: Basic auth with token*
+GET
+http://127.0.0.1:5000/api/admin/users
+
+*Basic auth with token requires token and random string.
