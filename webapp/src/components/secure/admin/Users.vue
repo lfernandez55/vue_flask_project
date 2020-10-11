@@ -21,7 +21,7 @@
           <td>{{ user.firstname }}</td>
           <td>{{ user.lastname }}</td>
           <td>{{ user.email }}</td>
-          <td>Todo</td>
+          <td>{{ user.roles | roleNames }}</td>
 
           <td>
             <router-link to="/admin/users/edit" tag="a"
@@ -48,6 +48,15 @@ export default {
     // setTimeout(()=>{this.$store.dispatch("getUsers3")},2000)
   },
   methods: {},
+  filters: {
+  roleNames: function (value) {
+    let mymap = value.map((obj)=>{
+        return obj.name;
+    })
+    mymap = mymap.join();
+    return mymap;
+  }
+}
 };
 </script>
 
