@@ -19,7 +19,7 @@ export default {
   },
   mounted: function() {
     // this.$store.dispatch("loadAccountData");
-    this.$store.dispatch("getUsers3");
+    this.$store.dispatch("getUsers");
     // setTimeout(()=>{this.$store.dispatch("getUsers3")},2000)
   },
   methods: {},
