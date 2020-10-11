@@ -124,12 +124,10 @@ if not User.query.filter(User.email == 'lfernandez@weber.edu').first():
 ############################################ROUTES ROUTES ROUTES ROUTES##########################################
 import authviews
  
+# a sample route 
 @app.route("/greeting")
-# @cross_origin(origin='localhost:8080',headers=['Content- Type','Authorization'])
-# @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def greeting():
     print(request.headers)
-    # return request.headers;
     return {'greeting': request.headers['Authorization']}
 
 

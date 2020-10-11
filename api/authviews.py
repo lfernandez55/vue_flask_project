@@ -4,6 +4,55 @@ from app import User, g, db
 from flask import Flask, abort, request, jsonify, url_for, render_template, make_response
 import copy
 
+
+@app.route('/api/token')
+@auth.login_required
+def get_auth_token():
+    token = g.user.generate_auth_token(600)
+    return jsonify({'token': token.decode('ascii'), 'duration': 600})
+
+@app.route('/api/account')
+@auth.login_required
+def get_account():
+    return jsonify({ \
+        'username': g.user.username, \
+        'email': g.user.email, \
+        'firstname': g.user.firstname, 'lastname': g.user.lastname, \
+        'roles': g.user.roles
+    }) 
+
+
+@app.route('/api/profile', methods=['PUT'])
+@auth.login_required
+def profile():
+    userObj = User.query.filter(User.username == g.user.username).first()
+    userObj.firstname = request.json.get('firstname')
+    userObj.lastname = request.json.get('lastname')
+    db.session.add(userObj)
+    db.session.commit()
+    return jsonify({ \
+        'username': g.user.username, \
+        'email': g.user.email, \
+        'firstname': g.user.firstname, 'lastname': g.user.lastname, \
+        'roles': g.user.roles
+    })
+
+@app.route('/api/admin/users')
+@auth.login_required(role='admin')
+@auth.login_required
+def user_list():
+    users = User.query.all()
+    return jsonify(users)
+
+
+#########################AUTH UTILITY CLASSES (NOT VIEWS, BUT USED BY VIEWS)#################################
+
+# See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+# search on 401 replacing with 403
+@auth.error_handler
+def unauthorized():
+    return make_response(jsonify({'error': 'Unauthorized access'}), 403)
+
 @auth.verify_password
 def verify_password(username_or_token, password):
     # first try to authenticate by token
@@ -15,6 +64,26 @@ def verify_password(username_or_token, password):
             return False
     g.user = user
     return True
+
+# below needed for role based auth like:
+# @auth.login_required(role='admin')
+# or
+# @auth.login_required(role=['admin', 'member'])
+# see https://flask-httpauth.readthedocs.io/en/latest/
+@auth.get_user_roles
+def get_user_roles(user):
+    sqlStatement = "SELECT roles.name FROM roles JOIN user_roles ON roles.id=user_roles.role_id JOIN users ON users.id=user_roles.user_id WHERE users.username='" + g.user.username + "'"
+    lt = db.engine.execute(sqlStatement)
+    # converts tuple list to list:
+    tupleToList = [item for t in lt for item in t] 
+    return tupleToList
+
+################################################################
+
+"""
+
+
+
 
 @app.route('/')
 def home():
@@ -44,14 +113,6 @@ def new_user():
             {'Location': url_for('get_user', id=user.id, _external=True)})
 
 
-@app.route('/api/admin/users')
-@auth.login_required
-def user_list():
-    users = User.query.all()
-    return jsonify(users)
-    # return jsonify({'foo': 'from admin/users'})
-
-
 @app.route('/api/users/<int:id>')
 def get_user(id):
     user = User.query.get(id)
@@ -60,13 +121,6 @@ def get_user(id):
     return jsonify({'username': user.username})
 
 
-@app.route('/api/token')
-@auth.login_required
-def get_auth_token():
-    print(request.headers)
-    token = g.user.generate_auth_token(600)
-    return jsonify({'token': token.decode('ascii'), 'duration': 600})
-
 
 @app.route('/api/resource')
 # @auth.login_required(role='admin')
@@ -74,58 +128,9 @@ def get_auth_token():
 def get_resource():
     return jsonify({'data': 'Hello, %s!' % g.user.username})
 
-@app.route('/api/account')
-# @auth.login_required(role='admin')
-@auth.login_required
-def get_account():
-    print('roles')
-    print(jsonify(g.user.roles))
-    return jsonify({ \
-        'username': g.user.username, \
-        'email': g.user.email, \
-        'firstname': g.user.firstname, 'lastname': g.user.lastname, \
-        'roles': g.user.roles
-    })
-
-@app.route('/api/profile', methods=['PUT'])
-# @app.route('/api/profile')
-@auth.login_required
-def profile():
-    print("in profile....AAddddDF")
-    userObj = User.query.filter(User.username == g.user.username).first()
-    print(userObj)
-    firstname = request.json.get('firstname')
-    lastname = request.json.get('lastname')
-    print(firstname)
-    userObj.firstname = request.json.get('firstname')
-    userObj.lastname = request.json.get('lastname')
-    db.session.add(userObj)
-    db.session.commit()
-    print(userObj)
-    # return jsonify({'username': firstname})
-    # for security reasons getting rid of the password before sending this back
-    objCopy = copy.deepcopy(userObj)
-    objCopy.password_hash = ""
-    # return jsonify(userObj)
-    userObj2 = User.query.filter(User.username == g.user.username).first()
-    print("marker")
-    # print(userObj2)
-    # return jsonify(objCopy)
-    # return make_response(jsonify({'error': 'Unauthorized access'}), 403)
-
-    return jsonify({ \
-        'username': g.user.username, \
-        'email': g.user.email, \
-        'firstname': g.user.firstname, 'lastname': g.user.lastname, \
-        'roles': g.user.roles
-    })
 
 
-# See https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
-# search on 401 replacing with 403
-@auth.error_handler
-def unauthorized():
-    return make_response(jsonify({'error': 'Unauthorized accessx'}), 403)
+
 
 
 @app.route('/api/testrole')
@@ -176,3 +181,5 @@ def api_role_c():
 @auth.login_required(role=['admin', 'member'])
 def api_role_b():
     return jsonify({'username': g.user.username, 'role': 'admin_member'})  
+
+"""
