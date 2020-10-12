@@ -38,7 +38,7 @@ class User(db.Model):
 
     id: int
     username: str
-    password_hash: str
+    # password_hash: str (we leave this out for security reasons so as not to return it to the browser)
     email: str
     firstname: str
     lastname: str
