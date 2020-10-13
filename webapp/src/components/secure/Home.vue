@@ -21,9 +21,9 @@
       >
     </ul> -->
     <hr>
-    <ul class="list-group">
-      <router-link v-for="role in this.$store.state.auth.roles" :key="role"
-        tag="li" :to=role class="list-group-item" style="cursor: pointer"
+    <ul class="list-group ">
+      <router-link v-for="role in this.$store.state.auth.roles" :key="role" 
+        tag="li" :to=role class="list-group-item " style="cursor: pointer"
         >{{ role | capitalize }}</router-link
       >
     </ul>
@@ -69,4 +69,7 @@ export default {
 li:hover{
   background-color:cornflowerblue;
 }
+.list-group{
+      display:inline-block;
+ }
 </style>

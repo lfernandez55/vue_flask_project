@@ -31,7 +31,7 @@ export default {
   watch: { '$route' () { this.updateList() } },
   methods: {
     routeTo (pRouteTo) {
-      if (this.breadcrumbList[pRouteTo].link) this.$router.push(this.breadcrumbList[pRouteTo].link)
+      if (this.breadcrumbList[pRouteTo].link) this.$router.push(this.breadcrumbList[pRouteTo].link).catch(()=>{});
     },
     updateList () { 
         this.breadcrumbList = this.$route.meta.breadcrumb 
