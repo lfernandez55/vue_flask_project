@@ -40,6 +40,9 @@ export const routes = [
       ],
       requiredRoles: ['admin']
     },
+    redirect: {
+      name: 'users'
+    },
     children:[
       {
         path: 'users', component: Users, name: 'users', meta: {
