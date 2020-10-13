@@ -24,9 +24,10 @@
           <td>{{ user.roles | roleNames }}</td>
 
           <td>
-            <router-link to="/admin/users/edit" tag="a"
+            <!-- <router-link to="/admin/users/edit" tag="a"
               ><a>edit</a></router-link
-            >
+            > -->
+            <router-link :to="{ name: 'useredit', params: { id: user.id }}">edit</router-link>
           </td>
 
           <td><a href="user.id">delete</a></td>

@@ -52,7 +52,8 @@ export const routes = [
         }
       },
       {
-        path: 'users/edit', component: UserEdit, name: 'useredit', meta: {
+        // path: 'users/edit', component: UserEdit, name: 'useredit', meta: {
+        path: 'users/edit/:id', component: UserEdit, name: 'useredit', meta: { 
           breadcrumb: [
             { name: 'Home', link: '/' },
             { name: 'Admin', link: '/admin' },
