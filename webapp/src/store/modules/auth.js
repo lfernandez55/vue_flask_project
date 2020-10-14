@@ -105,31 +105,21 @@ const actions = {
         alert("In actions.js error thrown: " + err)
       });
   },
-  // buyStock: ({ commit }, order) => {
-  //   commit('BUY_STOCK', order);
-  // }
   updateProfile: ({ commit }, userObj) => {
       console.log("in updateProfile", userObj)
       let url = Vue.prototype.$hostname + '/api/profile';
-      let data = {
-        firstname: userObj.firstname,
-        lastname: userObj.lastname
-      };
-      console.log(data)
       fetch(url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Basic " + btoa(state.token + ":" + "whatever")
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(userObj),
       })
         .then((response) => {
           return response.json();
         })
         .then((resp) => {
-          console.log(resp);
-          console.log(Vue.prototype.$hostname)
           commit('SET_ACCOUNT',resp);
           resp.foo = "success";
           if(resp.error){

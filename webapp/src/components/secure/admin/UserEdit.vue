@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
     <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
-      <h2>User Edit </h2>
+      <h2>User Edit</h2>
       <form
         action=""
         method="POST"
@@ -94,22 +94,34 @@ export default {
     return {
       msg: "",
       user: {},
+      submitPressed: false,
     };
   },
   methods: {
-    // update() {
-    //   this.$store.dispatch("updateProfile", this.input);
-    // },
+    update() {
+      this.submitPressed = true;
+      this.$store.dispatch("updateProfile", this.user);
+    },
   },
   mounted: function() {
-    console.log("in mounted", this.$route.params.id)
-    let userArray = this.$store.state.admin.users.filter((e)=>{
-        if (e.id == this.$route.params.id){
-            return e
-        }
-    })
-    this.user = userArray[0]
-  }
+    console.log("in mounted", this.$route.params.id);
+    let userArray = this.$store.state.admin.users.filter((e) => {
+      if (e.id == this.$route.params.id) {
+        return e;
+      }
+    });
+    this.user = userArray[0];
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.submitPressed == false) {
+      const answer = window.confirm("Do you really want to leave? you have unsaved changes!");
+      if (answer) {
+        next();
+      } else {
+        next(false);
+      }
+    }
+  },
 };
 </script>
 
