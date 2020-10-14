@@ -69,7 +69,6 @@
             class="form-control"
             id="password"
             name="password"
-            required
             tabindex="20"
             type="text"
             value="Example"
@@ -100,7 +99,7 @@ export default {
   methods: {
     update() {
       this.submitPressed = true;
-      this.$store.dispatch("updateProfile", this.user);
+      this.$store.dispatch("updateUser", this.user);
     },
   },
   mounted: function() {
@@ -120,6 +119,8 @@ export default {
       } else {
         next(false);
       }
+    }else{
+        next();
     }
   },
 };

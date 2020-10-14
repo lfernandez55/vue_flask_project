@@ -68,7 +68,48 @@ const actions = {
     //             alert("In actions.js error thrown: " + err)
     //         });
     // }
-    
+    updateUser: ({ commit, rootState }, userObj) => {
+        console.log("in updateProfile", userObj)
+        let url = Vue.prototype.$hostname + '/api/admin/user';
+        fetch(url, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Basic " + btoa(rootState.auth.token + ":" + "whatever")
+          },
+          body: JSON.stringify(userObj),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((resp) => {
+            // commit('SET_ACCOUNT',resp);
+            resp.foo = "success";
+            if(resp.error){
+              let payload = {
+                status: resp.error,
+                alertMsg: 'Darn.  Something went wrong updating a user!'
+              }
+              commit('SET_ALERT',payload);
+            }else{
+              let payload = {
+                status: 'success',
+                alertMsg: 'User updated!',
+                newRouteRequest: 'admin'
+              }
+              commit('SET_ALERT',payload);
+            }
+            
+          })
+          .catch((err) => {
+            alert("Error: " + err.message);
+            let payload = {
+              status: err,
+              alertMsg: 'Something went wrong'
+            }
+            commit('SET_ALERT',payload);
+          });
+    }
 }
 
 const getters = {
