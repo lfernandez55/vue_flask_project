@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
     <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
-      <h2>User Edit</h2>
+      <h2>User Edit {{user.roles}} {{userRolesArray}}</h2>
       <form
         action=""
         method="POST"
@@ -74,6 +74,12 @@
             value="Example"
           />
         </div>
+        <div class="form-group  ">
+          <label for="password" class="control-label">Roles</label>
+          <select v-model="userRolesArray" multiple class="form-control">
+            <option v-for="role in this.$store.state.admin.roles" :key="role.id">{{role.name}}</option>
+          </select>
+        </div>
         <input
           type="submit"
           name="submit"
@@ -87,6 +93,10 @@
 </template>
 
 <script>
+            // rolesArray: this.user.roles.map((role)=>{
+      //   return role.name
+      // })
+
 export default {
   name: "UserEdit",
   data() {
@@ -94,11 +104,23 @@ export default {
       msg: "",
       user: {},
       submitPressed: false,
+      selected: "",
+      userRolesArray: []
     };
   },
   methods: {
     update() {
       this.submitPressed = true;
+      //todo this.user.roles = userRolesArray
+      this.user.role = []
+      this.user.roles = this.$store.state.admin.roles.filter((role)=>{
+        // let newUserRoles = []
+        if ( this.userRolesArray.includes(role.name) ){
+          // newUserRoles.push(role)
+          return role;
+        }
+        // return newUserRoles;
+      })
       this.$store.dispatch("updateUser", this.user);
     },
   },
@@ -110,17 +132,22 @@ export default {
       }
     });
     this.user = userArray[0];
+    this.userRolesArray = this.user.roles.map((role)=>{
+        return role.name
+    })
   },
   beforeRouteLeave(to, from, next) {
     if (this.submitPressed == false) {
-      const answer = window.confirm("Do you really want to leave? you have unsaved changes!");
+      const answer = window.confirm(
+        "Do you really want to leave? you have unsaved changes!"
+      );
       if (answer) {
         next();
       } else {
         next(false);
       }
-    }else{
-        next();
+    } else {
+      next();
     }
   },
 };

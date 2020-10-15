@@ -1,6 +1,6 @@
 <template>
   <div id="admin">
-    <!-- {{this.$store.state.admin.users}}  -->
+    <!-- {{this.$store.state.admin.roles}}  -->
     <div class="text-right top_div">
       <a class="btn btn-default btn-primary" href="">Create User</a>
     </div>
@@ -46,6 +46,7 @@ export default {
   mounted: function() {
     // this.$store.dispatch("loadAccountData");
     this.$store.dispatch("getUsers");
+    this.$store.dispatch("getRoles");
     // setTimeout(()=>{this.$store.dispatch("getUsers3")},2000)
   },
   methods: {},

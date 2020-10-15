@@ -1,6 +1,6 @@
 from app import app
 from app import auth
-from app import User, g, db
+from app import User, Role, g, db
 from flask import Flask, abort, request, jsonify, url_for, render_template, make_response
 import copy
 
@@ -44,6 +44,14 @@ def user_list():
     users = User.query.all()
     return jsonify(users)
 
+@app.route('/api/admin/roles')
+@auth.login_required(role='admin')
+@auth.login_required
+def roles_list():
+    roles = Role.query.all()
+    return jsonify(roles)
+
+
 
 @app.route('/api/admin/user', methods=['PUT'])
 @auth.login_required(role='admin')
@@ -55,8 +63,11 @@ def updateUser():
     userObj.firstname = request.json.get('firstname')
     userObj.lastname = request.json.get('lastname')
     userObj.username = request.json.get('username')
-    if request.json.get('password') != "":
+    # if request.json.get('password') != "":
+    try:
         userObj.hash_password(request.json.get('password'))
+    except:
+        print("Password param was not passed in json.  So not updating it")    
     db.session.add(userObj)
     db.session.commit()
     return jsonify({'operation': 'success'})

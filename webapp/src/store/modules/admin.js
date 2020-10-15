@@ -1,12 +1,16 @@
 import Vue from 'vue'
 
 const state = {
-    users: []
+    users: [],
+    roles: []
 }
 
 const mutations = {
     SET_USERS: function (state, resp) {
         state.users = resp
+    },
+    SET_ROLES: function (state, resp) {
+      state.roles = resp
     }
 
 }
@@ -68,6 +72,39 @@ const actions = {
     //             alert("In actions.js error thrown: " + err)
     //         });
     // }
+    getRoles: (context) => {
+      let url = Vue.prototype.$hostname + '/api/admin/roles';
+      fetch(url, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Basic " + btoa(context.rootState.auth.token + ":" + "whatever")
+          }
+      })
+          .then((response) => {
+              return response.json();
+          })
+          .then((resp) => {
+              if (resp.error) {
+                  let payload = {
+                      status: resp.error,
+                      alertMsg: 'Darn.  Something went wrong while getting roles!'
+                  }
+                  context.commit('SET_ALERT', payload);
+              } else {
+                  context.commit('SET_ROLES', resp);
+              }
+
+          })
+          .catch((err) => {
+              alert("Error: " + err.message);
+              let payload = {
+                  status: err,
+                  alertMsg: 'Something went wrong while getting roles'
+              }
+              context.commit('SET_ALERT', payload);
+          });
+  },
     updateUser: ({ commit, rootState }, userObj) => {
         console.log("in updateProfile", userObj)
         let url = Vue.prototype.$hostname + '/api/admin/user';
