@@ -3,6 +3,12 @@
     <!-- {{this.$store.state.admin.roles}}  -->
     <div class="text-right top_div">
       <a class="btn btn-default btn-primary" href="">Create User</a>
+      <router-link 
+       class="btn btn-default btn-primary"
+       tag=button 
+       :to="{ name: 'useredit', params: { id: 0 }}">
+       Create Userx</router-link>
+        
     </div>
 
     <table class="table">

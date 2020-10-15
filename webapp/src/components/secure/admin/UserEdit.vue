@@ -111,27 +111,26 @@ export default {
   methods: {
     update() {
       this.submitPressed = true;
-      //todo this.user.roles = userRolesArray
       this.user.role = []
       this.user.roles = this.$store.state.admin.roles.filter((role)=>{
-        // let newUserRoles = []
         if ( this.userRolesArray.includes(role.name) ){
-          // newUserRoles.push(role)
           return role;
         }
-        // return newUserRoles;
       })
+      if (this.user.id)
       this.$store.dispatch("updateUser", this.user);
     },
   },
   mounted: function() {
-    console.log("in mounted", this.$route.params.id);
+    //loads the user that was passed in by the id (for update -- create doesn't run this)
     let userArray = this.$store.state.admin.users.filter((e) => {
       if (e.id == this.$route.params.id) {
         return e;
       }
     });
     this.user = userArray[0];
+
+    //loads userRolesArray (the user's SELECTED roles)
     this.userRolesArray = this.user.roles.map((role)=>{
         return role.name
     })

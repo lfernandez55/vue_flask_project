@@ -71,10 +71,6 @@ def updateUser():
     userObj.roles[:] = []
     rolesJSON = request.json.get('roles')
     for role in rolesJSON:
-        # print("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
-        # print(role)
-        # print(type(role))
-        # print(role['id'])
         roleObj = Role.query.filter(Role.id == role['id']).first()
         userObj.roles.append(roleObj)
 
@@ -83,6 +79,34 @@ def updateUser():
     except:
         print("Password param was not passed in json.  So not updating it")    
     db.session.add(userObj)
+    db.session.commit()
+    return jsonify({'operation': 'success'})
+
+
+@app.route('/api/admin/user', methods=['POST'])
+@auth.login_required(role='admin')
+@auth.login_required
+def createUser():
+    print('creating user')
+    username = request.json.get('username')
+    firstname = request.json.get('firstname')
+    lastname = request.json.get('lastname')
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+    if username is None or password is None:
+        abort(400)    # missing arguments
+    if User.query.filter_by(username=username).first() is not None:
+        abort(400)    # existing user
+    user = User(username=username,firstname=firstname,lastname=lastname,email=email)
+    user.hash_password(password)
+    
+    rolesJSON = request.json.get('roles')
+    for role in rolesJSON:
+        roleObj = Role.query.filter(Role.id == role['id']).first()
+        user.roles.append(roleObj)
+
+    db.session.add(user)
     db.session.commit()
     return jsonify({'operation': 'success'})
 
