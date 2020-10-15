@@ -3,6 +3,7 @@ from app import auth
 from app import User, Role, g, db
 from flask import Flask, abort, request, jsonify, url_for, render_template, make_response
 import copy
+import json
 
 
 @app.route('/api/token')
@@ -60,10 +61,23 @@ def updateUser():
     print('updating user', request.json.get('id'))
     userObj = User.query.filter(User.id == request.json.get('id')).first()
     print(userObj)
+    print('XXXXXXXXXXXXX')
+    print(request.json.get('roles'))
     userObj.firstname = request.json.get('firstname')
     userObj.lastname = request.json.get('lastname')
     userObj.username = request.json.get('username')
-    # if request.json.get('password') != "":
+
+    # roles
+    userObj.roles[:] = []
+    rolesJSON = request.json.get('roles')
+    for role in rolesJSON:
+        # print("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
+        # print(role)
+        # print(type(role))
+        # print(role['id'])
+        roleObj = Role.query.filter(Role.id == role['id']).first()
+        userObj.roles.append(roleObj)
+
     try:
         userObj.hash_password(request.json.get('password'))
     except:
