@@ -110,6 +110,16 @@ def createUser():
     db.session.commit()
     return jsonify({'operation': 'success'})
 
+@app.route('/api/admin/user', methods=['DELETE'])
+@auth.login_required(role='admin')
+@auth.login_required
+def deleteUser():
+    print('deleting userx', request.json.get('id'))
+    userObj = User.query.filter(User.id == request.json.get('id')).first()
+    db.session.delete(userObj)
+    db.session.commit()
+    return jsonify({'operation': 'success'})
+
 
 #########################AUTH UTILITY CLASSES (NOT VIEWS, BUT USED BY VIEWS)#################################
 

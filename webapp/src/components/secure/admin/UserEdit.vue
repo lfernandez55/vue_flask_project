@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
     <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
-      <h2>User Edit {{user.roles}} {{userRolesArray}}</h2>
+      <h2>User {{operationType}} {{user.roles}} {{userRolesArray}}</h2>
       <form
         action=""
         method="POST"
@@ -84,10 +84,11 @@
           type="submit"
           name="submit"
           class="btn btn-default btn-primary"
-          value="Update"
+          :value="operationType"
           tabindex="30"
         />
       </form>
+      <button @click="debug">DEGUG</button>
     </div>
   </div>
 </template>
@@ -104,11 +105,21 @@ export default {
       msg: "",
       user: {},
       submitPressed: false,
-      selected: "",
-      userRolesArray: []
+      userRolesArray: [],  // (the user's SELECTED roles NOT all the roles)
+      operationType: ""  // Edit or Create
     };
   },
   methods: {
+    debug() {
+      this.user = {
+        firstname:'Susan',
+        lastname: 'Matt',
+        username: 'smatt',
+        email: 'smatt@weber.edu',
+        password: 'ssss',
+        roles: []
+      }
+    },
     update() {
       this.submitPressed = true;
       this.user.role = []
@@ -117,23 +128,43 @@ export default {
           return role;
         }
       })
-      if (this.user.id)
-      this.$store.dispatch("updateUser", this.user);
+
+      if(this.operationType == "Edit"){
+        this.$store.dispatch("updateUser", this.user);
+      }else{
+        console.log('about to create user')
+        this.$store.dispatch("createUser", this.user);
+      }
+      
     },
   },
   mounted: function() {
-    //loads the user that was passed in by the id (for update -- create doesn't run this)
-    let userArray = this.$store.state.admin.users.filter((e) => {
-      if (e.id == this.$route.params.id) {
-        return e;
-      }
-    });
-    this.user = userArray[0];
+    if (this.$route.params.id != 0){
+      this.operationType = 'Edit'
+      //loads the user that was passed in by the id (for update -- create doesn't run this)
+      let userArray = this.$store.state.admin.users.filter((e) => {
+        if (e.id == this.$route.params.id) {
+          return e;
+        }
+      });
+      this.user = userArray[0];
 
-    //loads userRolesArray (the user's SELECTED roles)
-    this.userRolesArray = this.user.roles.map((role)=>{
-        return role.name
-    })
+      //loads userRolesArray (the user's SELECTED roles NOT all the roles)
+      this.userRolesArray = this.user.roles.map((role)=>{
+          return role.name
+      })
+    } else {
+      this.operationType = "Create"
+      this.user = {
+        firstname:'',
+        lastname: '',
+        username: '',
+        email: '',
+        password: '',
+        roles: []
+      }
+    }
+
   },
   beforeRouteLeave(to, from, next) {
     if (this.submitPressed == false) {

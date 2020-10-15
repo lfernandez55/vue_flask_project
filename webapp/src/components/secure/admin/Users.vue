@@ -2,12 +2,11 @@
   <div id="admin">
     <!-- {{this.$store.state.admin.roles}}  -->
     <div class="text-right top_div">
-      <a class="btn btn-default btn-primary" href="">Create User</a>
       <router-link 
        class="btn btn-default btn-primary"
        tag=button 
        :to="{ name: 'useredit', params: { id: 0 }}">
-       Create Userx</router-link>
+       Create User</router-link>
         
     </div>
 
@@ -30,13 +29,11 @@
           <td>{{ user.roles | roleNames }}</td>
 
           <td>
-            <!-- <router-link to="/admin/users/edit" tag="a"
-              ><a>edit</a></router-link
-            > -->
             <router-link :to="{ name: 'useredit', params: { id: user.id }}">edit</router-link>
           </td>
 
-          <td><a href="user.id">delete</a></td>
+          <td><a href="#" @click="deleteUser(user.id)">delete</a>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -55,7 +52,15 @@ export default {
     this.$store.dispatch("getRoles");
     // setTimeout(()=>{this.$store.dispatch("getUsers3")},2000)
   },
-  methods: {},
+  methods: {
+    deleteUser(id) {
+      let user ={
+        id: id
+      }
+      this.$store.dispatch("deleteUser", user);
+    }
+
+  },
   filters: {
   roleNames: function (value) {
     let mymap = value.map((obj)=>{

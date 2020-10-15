@@ -147,6 +147,94 @@ const actions = {
             commit('SET_ALERT',payload);
           });
     }
+    ,
+    createUser: ({ commit, rootState }, userObj) => {
+        console.log("in updateProfile", userObj)
+        let url = Vue.prototype.$hostname + '/api/admin/user';
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Basic " + btoa(rootState.auth.token + ":" + "whatever")
+          },
+          body: JSON.stringify(userObj),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((resp) => {
+            if(resp.error){
+              let payload = {
+                status: resp.error,
+                alertMsg: 'Darn.  Something went wrong creating a user!'
+              }
+              commit('SET_ALERT',payload);
+            }else{
+              let payload = {
+                status: 'success',
+                alertMsg: 'User created!',
+                newRouteRequest: 'admin'
+              }
+              commit('SET_ALERT',payload);
+            }
+            
+          })
+          .catch((err) => {
+            alert("Error: " + err.message);
+            let payload = {
+              status: err,
+              alertMsg: 'Something went wrong'
+            }
+            commit('SET_ALERT',payload);
+          });
+    },    
+    deleteUser: ({ commit, rootState }, userObj) => {
+      console.log("in updateProfile", userObj)
+      let url = Vue.prototype.$hostname + '/api/admin/user';
+      fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Basic " + btoa(rootState.auth.token + ":" + "whatever")
+        },
+        body: JSON.stringify(userObj),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((resp) => {
+          if(resp.error){
+            let payload = {
+              status: resp.error,
+              alertMsg: 'Darn.  Something went wrong deleting a user!'
+            }
+            commit('SET_ALERT',payload);
+          }else{
+
+            let payload = {
+              status: 'success',
+              alertMsg: 'User deleted!',
+            }
+            commit('SET_ALERT',payload);
+            // sync vuex state with db:
+            let userArray = rootState.admin.users.filter((e) => {
+              if (e.id != userObj.id) {
+                return e;
+              }
+            });
+            rootState.admin.users = userArray;
+          }
+          
+        })
+        .catch((err) => {
+          alert("Error: " + err.message);
+          let payload = {
+            status: err,
+            alertMsg: 'Something went wrong'
+          }
+          commit('SET_ALERT',payload);
+        });
+  }
 }
 
 const getters = {
