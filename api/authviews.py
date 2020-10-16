@@ -58,11 +58,7 @@ def roles_list():
 @auth.login_required(role='admin')
 @auth.login_required
 def updateUser():
-    print('updating user', request.json.get('id'))
     userObj = User.query.filter(User.id == request.json.get('id')).first()
-    print(userObj)
-    print('XXXXXXXXXXXXX')
-    print(request.json.get('roles'))
     userObj.firstname = request.json.get('firstname')
     userObj.lastname = request.json.get('lastname')
     userObj.username = request.json.get('username')
@@ -114,7 +110,7 @@ def createUser():
 @auth.login_required(role='admin')
 @auth.login_required
 def deleteUser():
-    print('deleting userx', request.json.get('id'))
+    print('deleting user', request.json.get('id'))
     userObj = User.query.filter(User.id == request.json.get('id')).first()
     db.session.delete(userObj)
     db.session.commit()

@@ -4,6 +4,8 @@ In your second terminal, `cd` into the "webapp" folder. Install your node depend
 
 ---------------
 
-The contents in API were created using standard Flask dev processes. See the readme for the derivative projects.
+The contents in API were created using standard Flask dev processes. See the readme in root/API for a description of the derivative projects.
 
 The initial contents inside webapp were created by opening a terminal at root (where this readme is located) and typing vue create webapp
+
+The general structure of the code was spelled out in Combining Flask and Vue: Single Page Application: https://testdriven.io/blog/combine-flask-vue/
