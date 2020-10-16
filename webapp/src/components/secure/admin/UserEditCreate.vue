@@ -99,7 +99,7 @@
       // })
 
 export default {
-  name: "UserEdit",
+  name: "UserEditCreate",
   data() {
     return {
       msg: "",

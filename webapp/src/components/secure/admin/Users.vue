@@ -5,7 +5,7 @@
       <router-link 
        class="btn btn-default btn-primary"
        tag=button 
-       :to="{ name: 'useredit', params: { id: 0 }}">
+       :to="{ name: 'usereditcreate', params: { id: 0 }}">
        Create User</router-link>
         
     </div>
@@ -29,7 +29,7 @@
           <td>{{ user.roles | roleNames }}</td>
 
           <td>
-            <router-link :to="{ name: 'useredit', params: { id: user.id }}">edit</router-link>
+            <router-link :to="{ name: 'usereditcreate', params: { id: user.id }}">edit</router-link>
           </td>
 
           <td><a href="#" @click="deleteUser(user.id)">delete</a>

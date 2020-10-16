@@ -8,7 +8,7 @@ import Member from './components/secure/Member.vue'
 import Agent from './components/secure/Agent.vue'
 
 import Users from './components/secure/admin/Users.vue'
-import UserEdit from './components/secure/admin/UserEdit.vue'
+import UserEditCreate from './components/secure/admin/UserEditCreate.vue'
 
 import Roles from './components/secure/admin/Roles.vue'
 
@@ -55,8 +55,7 @@ export const routes = [
         }
       },
       {
-        // path: 'users/edit', component: UserEdit, name: 'useredit', meta: {
-        path: 'users/edit/:id', component: UserEdit, name: 'useredit', meta: { 
+        path: 'users/edit/:id', component: UserEditCreate, name: 'usereditcreate', meta: { 
           breadcrumb: [
             { name: 'Home', link: '/' },
             { name: 'Admin', link: '/admin' },
