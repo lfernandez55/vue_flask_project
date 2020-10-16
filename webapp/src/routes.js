@@ -31,7 +31,7 @@ export const routes = [
       ]
     }
   },
-  // { path: '/debug', component: Debug, name: 'debug' }, 
+
   {
     path: '/admin', component: Admin, name: 'admin', meta: {
       breadcrumb: [
@@ -94,7 +94,9 @@ export const routes = [
   { path: '/member', component: Member, name: 'member' },
   { path: '/agent', component: Agent, name: 'agent' },
 
-  { path: '/unauthorized', component: Warning, name: 'warning' }
+  { path: '/unauthorized', component: Warning, name: 'warning' },
+ 
+
 ];
 
 

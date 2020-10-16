@@ -103,7 +103,7 @@ if not User.query.filter(User.email == 'member@example.com').first():
         lastname='Man',
         username='momoman'            
     )
-    user.hash_password('black')
+    user.hash_password('blue')
     user.roles.append(Role(name='member'))
     db.session.add(user)
     db.session.commit()
