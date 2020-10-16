@@ -11,7 +11,7 @@ import Users from './components/secure/admin/Users.vue'
 import UserEditCreate from './components/secure/admin/UserEditCreate.vue'
 
 import Roles from './components/secure/admin/Roles.vue'
-
+import RoleEditCreate from './components/secure/admin/RoleEditCreate.vue'
 
 
 export const routes = [
@@ -71,6 +71,17 @@ export const routes = [
             { name: 'Home', link: '/' },
             { name: 'Admin', link: '/admin' },
             { name: 'Roles' }
+          ],
+          requiredRoles: ['admin']
+        }
+      },
+      {
+        path: 'roles/edit/:id', component: RoleEditCreate, name: 'roleeditcreate', meta: { 
+          breadcrumb: [
+            { name: 'Home', link: '/' },
+            { name: 'Admin', link: '/admin' },
+            { name: 'Roles', link: '/admin/roles' },
+            { name: 'Edit'},
           ],
           requiredRoles: ['admin']
         }

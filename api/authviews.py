@@ -52,7 +52,7 @@ def roles_list():
     roles = Role.query.all()
     return jsonify(roles)
 
-
+################## Update, Create, Delete User ########################
 
 @app.route('/api/admin/user', methods=['PUT'])
 @auth.login_required(role='admin')
@@ -119,6 +119,43 @@ def deleteUser():
     db.session.delete(userObj)
     db.session.commit()
     return jsonify({'operation': 'success'})
+
+################## Update, Create, Delete Role ########################
+
+@app.route('/api/admin/role', methods=['PUT'])
+@auth.login_required(role='admin')
+@auth.login_required
+def updateRole():
+    print('updating role', request.json.get('id'))
+    roleObj = Role.query.filter(Role.id == request.json.get('id')).first()
+    roleObj.name = request.json.get('name')
+    db.session.add(roleObj)
+    db.session.commit()
+    return jsonify({'operation': 'success'})
+
+
+@app.route('/api/admin/role', methods=['POST'])
+@auth.login_required(role='admin')
+@auth.login_required
+def createRole():
+    print('creating role')
+    name = request.json.get('name')
+    role = Role(name=name)
+    
+    db.session.add(role)
+    db.session.commit()
+    return jsonify({'operation': 'success'})
+
+@app.route('/api/admin/role', methods=['DELETE'])
+@auth.login_required(role='admin')
+@auth.login_required
+def deleteRole():
+    print('deleting role', request.json.get('id'))
+    roleObj = Role.query.filter(Role.id == request.json.get('id')).first()
+    db.session.delete(roleObj)
+    db.session.commit()
+    return jsonify({'operation': 'success'})
+
 
 
 #########################AUTH UTILITY CLASSES (NOT VIEWS, BUT USED BY VIEWS)#################################

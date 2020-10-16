@@ -44,7 +44,7 @@ export default {
   },
   mounted: function() {
     // roles already loaded when User.vue component is loaded
-    // this.$store.dispatch("getRoles");
+    this.$store.dispatch("getRoles");
   },
   methods: {
     deleteRole(id) {
