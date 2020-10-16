@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
     <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
-      <h2>User {{operationType}} {{user.roles}} {{userRolesArray}}</h2>
+      <h2>User {{operationType}} </h2>
       <form
         action=""
         method="POST"
@@ -88,16 +88,13 @@
           tabindex="30"
         />
       </form>
-      <button @click="debug">DEGUG</button>
+      
+      <button @click="debug" style="margin-top: 10px">DEBUG</button>
     </div>
   </div>
 </template>
 
 <script>
-            // rolesArray: this.user.roles.map((role)=>{
-      //   return role.name
-      // })
-
 export default {
   name: "UserEditCreate",
   data() {
@@ -106,7 +103,7 @@ export default {
       user: {},
       submitPressed: false,
       userRolesArray: [],  // (the user's SELECTED roles NOT all the roles)
-      operationType: ""  // Edit or Create
+      operationType: ""  // Update or Create
     };
   },
   methods: {
@@ -129,7 +126,7 @@ export default {
         }
       })
 
-      if(this.operationType == "Edit"){
+      if(this.operationType == "Update"){
         this.$store.dispatch("updateUser", this.user);
       }else{
         console.log('about to create user')
@@ -140,7 +137,7 @@ export default {
   },
   mounted: function() {
     if (this.$route.params.id != 0){
-      this.operationType = 'Edit'
+      this.operationType = 'Update'
       //loads the user that was passed in by the id (for update -- create doesn't run this)
       let userArray = this.$store.state.admin.users.filter((e) => {
         if (e.id == this.$route.params.id) {
