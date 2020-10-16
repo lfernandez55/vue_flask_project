@@ -20,7 +20,6 @@
             required
             tabindex="10"
             type="text"
-            value="Admin"
           />
         </div>
         <div class="form-group  ">
@@ -33,7 +32,6 @@
             required
             tabindex="20"
             type="text"
-            value="Example"
           />
         </div>
         <div class="form-group  ">
@@ -46,7 +44,6 @@
             required
             tabindex="20"
             type="text"
-            value="Example"
           />
         </div>
         <div class="form-group  ">
@@ -59,7 +56,6 @@
             required
             tabindex="20"
             type="text"
-            value="Example"
           />
         </div>
         <div class="form-group  ">
@@ -71,11 +67,11 @@
             name="password"
             tabindex="20"
             type="text"
-            value="Example"
           />
         </div>
         <div class="form-group  ">
-          <label for="password" class="control-label">Roles</label>
+          <!-- easter egg: click here for creating user quickly -->
+          <label for="password" class="control-label" @click="debug">Roles</label>
           <select v-model="userRolesArray" multiple class="form-control">
             <option v-for="role in this.$store.state.admin.roles" :key="role.id">{{role.name}}</option>
           </select>
@@ -88,8 +84,7 @@
           tabindex="30"
         />
       </form>
-      
-      <button @click="debug" style="margin-top: 10px">DEBUG</button>
+
     </div>
   </div>
 </template>
