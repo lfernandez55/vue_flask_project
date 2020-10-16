@@ -40,13 +40,9 @@ const router = new VueRouter({
   routes,
 });
 
+// this checks the router meta each time the route changes and performs auth checks
 router.beforeEach((to, from, next) => {
-  console.log('beforeEach', to, from)
-  console.log("AAAAAAAAAAAAAAAa")
-  console.log(to.meta.requiredRoles)
-  console.log("BBBBBBBBBBBBBB")
-  console.log(store.state.auth.roles)
-  console.log("ZZZZZZZZZZZZZzzzzzzz")
+  // console.log('beforeEach', to, from, next)
   if (to.meta.requiredRoles){
     const found = to.meta.requiredRoles.some(r=> store.state.auth.roles.includes(r))
     if ( found == true){

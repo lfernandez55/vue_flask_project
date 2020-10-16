@@ -35,8 +35,6 @@ export default {
     },
     updateList () { 
         this.breadcrumbList = this.$route.meta.breadcrumb 
-        //this.breadcrumbList = this.$router.currentRoute
-        //console.log("this.breadcrumblist:", this.$router.currentRoute)
         }
   }
 }

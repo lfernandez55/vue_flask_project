@@ -17,25 +17,14 @@ const mutations = {
     state.token = tokenString
   },
   SET_ACCOUNT: function (state, resp) {
-    console.log("in SET_ACCOUNT", resp)
     state.username = resp.username;
     state.email = resp.email;
     state.firstName = resp.firstname;
     state.lastName = resp.lastname;
     //converting array of objects into array of role names
     state.roles = resp.roles.map((obj)=>{return obj.name})
-    console.log("state:", state)
-  },
-  SET_FOO: function (state, resp) {
-    console.log("in SET_FOO", resp)
   }
-  // ,
-  // SET_ALERT: function (state, payload) {
-  //   console.log("in SET_ALERT", payload)
-  //   state.alertType = payload.status;
-  //   state.alertMsg = payload.alertMsg;
-  //   setTimeout(()=>{state.alertMsg = ""; console.log("in settimeout")},3000)
-  // }
+
 }
 
 const actions = {
@@ -52,9 +41,7 @@ const actions = {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          console.log(data);
           if (data.token) {
-            console.log("here1")
             context.dispatch("setToken", data.token);
           }
         }
@@ -67,7 +54,6 @@ const actions = {
           }
           context.commit('SET_ALERT',payload);
         } else {
-          console.log("Error: " + err.message);
           let payload = {
             status: err,
             alertMsg: 'Something went wrong'
@@ -79,7 +65,6 @@ const actions = {
 
 
   setToken: ({ commit }, tokenStr) => {
-    console.log("now here 231")
     commit('SET_TOKEN', tokenStr)
   },
   loadAccountData: ({ commit }) => {
@@ -97,7 +82,6 @@ const actions = {
       .then((response) => response.json())
       .then((resp) => {
         if (resp) {
-          console.log("in actions.jsxxxx", resp)
           commit('SET_ACCOUNT', resp)
         }
       })
@@ -106,7 +90,6 @@ const actions = {
       });
   },
   updateProfile: ({ commit }, userObj) => {
-      console.log("in updateProfile", userObj)
       let url = Vue.prototype.$hostname + '/api/profile';
       fetch(url, {
         method: "PUT",

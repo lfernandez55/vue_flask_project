@@ -124,7 +124,6 @@ export default {
       if(this.operationType == "Update"){
         this.$store.dispatch("updateUser", this.user);
       }else{
-        console.log('about to create user')
         this.$store.dispatch("createUser", this.user);
       }
       

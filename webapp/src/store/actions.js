@@ -19,25 +19,4 @@ export const loadData = ({ commit }) => {
     });
 };
 
-// export const loadUserData = ({ commit },token) => {
-//   console.log("in actions.js", token)
-//   let headerObj = {
-//     headers: {
-//       "Content-Type": "text/plain",
-//       Authorization:
-//         "Basic " + btoa(token + ":" + "whatever"),
-//     },
-//   };
-//   Vue.http
-//     .get("api/account", headerObj)
-//     .then((response) => response.json())
-//     .then((resp) => {
-//       if (resp) {
-//         console.log("in actions.jsxxxx", resp)
-//         commit('SET_ACCOUNT',resp)
-//       }
-//     })
-//     .catch((err) => {
-//       alert("In actions.js error thrown: " + err)
-//     });
-// };
+

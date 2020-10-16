@@ -54,7 +54,6 @@ export default {
       if(this.operationType == "Update"){
         this.$store.dispatch("updateRole", this.role);
       }else{
-        console.log('about to update role')
         this.$store.dispatch("createRole", this.role);
       }
       

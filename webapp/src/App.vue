@@ -23,8 +23,7 @@ export default {
   },
   watch: {
     //see https://stackoverflow.com/questions/54870454/watching-a-vuex-store
-    '$store.state.auth.token'(value, oldValue) {
-      console.log("xyxeee", value, oldValue);
+    '$store.state.auth.token'(value) {
       if (value == ""){
         this.$router.replace({ name: "login" });
       } else {
@@ -32,8 +31,6 @@ export default {
       }
       },
     '$store.state.general.newRouteRequest'(value) {
-      console.log("watch in app.vue", value);
-      console.log("watch in app.vue2", this.$store.state.general.newRouteRequest);
       if (value != ""){
         this.$router.replace({ name: value});
         // this.$store.state.general.newRouteRequest = "";

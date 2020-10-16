@@ -4,8 +4,6 @@
       <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
       <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
         <h2>Login</h2>
-
-        <!-- <h4>{{ msg }}</h4> -->
         <div class="form-group  ">
           <label for="login" class="control-label">Login name</label>
 
@@ -51,7 +49,6 @@ export default {
         username: "lfernandez",
         password: "white",
       },
-      msg: "",
     };
   },
   methods: {
@@ -59,8 +56,6 @@ export default {
       if (this.input.username != "" && this.input.password != "") {
         this.$store.dispatch("login", this.input);
       } else {
-        this.msg = "A username and password must be present";
-        console.log("A username and password must be present");
         this.$store.commit('SET_ALERT', { status: 'error', alertMsg: 'A username and password must be present' })
       }
     },

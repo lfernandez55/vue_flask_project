@@ -51,7 +51,6 @@ const actions = {
   },
   //the below is just like the above only using vue resource instead of fetch
   // getUsers: (context) => {
-  //     console.log("in getuser3", context.rootState.auth.token)
   //     let headerObj = {
   //         headers: {
   //             "Content-Type": "text/plain",
@@ -64,7 +63,6 @@ const actions = {
   //         .then((response) => response.json())
   //         .then((resp) => {
   //             if (resp) {
-  //                 console.log("in actions.jsxxxx", resp)
   //                 context.commit('SET_USERS', resp)
   //             }
   //         })
@@ -106,7 +104,6 @@ const actions = {
       });
   },
   updateUser: ({ commit, rootState }, userObj) => {
-    console.log("in updateProfile", userObj)
     let url = Vue.prototype.$hostname + '/api/admin/user';
     fetch(url, {
       method: "PUT",
@@ -149,7 +146,6 @@ const actions = {
   }
   ,
   createUser: ({ commit, rootState }, userObj) => {
-    console.log("in updateProfile", userObj)
     let url = Vue.prototype.$hostname + '/api/admin/user';
     fetch(url, {
       method: "POST",
@@ -189,7 +185,6 @@ const actions = {
       });
   },
   deleteUser: ({ commit, rootState }, userObj) => {
-    console.log("in updateProfile", userObj)
     let url = Vue.prototype.$hostname + '/api/admin/user';
     fetch(url, {
       method: "DELETE",
@@ -237,7 +232,6 @@ const actions = {
   },
   // ROLES ACTIONS -------------------------------------------------------------
   updateRole: ({ commit, rootState }, roleObj) => {
-    console.log("in updateRole", roleObj)
     let url = Vue.prototype.$hostname + '/api/admin/role';
     fetch(url, {
       method: "PUT",
@@ -278,7 +272,6 @@ const actions = {
   }
   ,
   createRole: ({ commit, rootState }, roleObj) => {
-    console.log("in updateProfile", roleObj)
     let url = Vue.prototype.$hostname + '/api/admin/role';
     fetch(url, {
       method: "POST",
@@ -318,7 +311,6 @@ const actions = {
       });
   },
   deleteRole: ({ commit, rootState }, roleObj) => {
-    console.log("in updateProfile", roleObj)
     let url = Vue.prototype.$hostname + '/api/admin/role';
     fetch(url, {
       method: "DELETE",
