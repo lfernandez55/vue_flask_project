@@ -8,7 +8,7 @@
         method="POST"
         class="form"
         role="form"
-        v-on:submit.prevent="update"
+        v-on:submit.prevent="updateCreate"
       >
         <div class="form-group  ">
           <label for="first_name" class="control-label">Role name</label>
@@ -20,7 +20,7 @@
             required
             tabindex="10"
             type="text"
-            value="Admin"
+            
           />
         </div>
         
@@ -32,8 +32,7 @@
           tabindex="30"
         />
       </form>
-      
-      <button @click="debug" style="margin-top: 10px">DEBUG</button>
+
     </div>
   </div>
 </template>
@@ -50,12 +49,7 @@ export default {
     };
   },
   methods: {
-    debug() {
-      this.role = {
-        name:'Flunky'
-      }
-    },
-    update() {
+    updateCreate() {
       this.submitPressed = true;
       if(this.operationType == "Update"){
         this.$store.dispatch("updateRole", this.role);

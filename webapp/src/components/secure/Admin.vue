@@ -1,6 +1,5 @@
 <template>
   <div id="admin">
-    <h1>Admin Component</h1>
     <ul class="nav nav-tabs">
         <router-link
         to="/admin/users"

@@ -8,7 +8,7 @@
         method="POST"
         class="form"
         role="form"
-        v-on:submit.prevent="update"
+        v-on:submit.prevent="updateCreate"
       >
         <div class="form-group  ">
           <label for="first_name" class="control-label">First name</label>
@@ -117,7 +117,7 @@ export default {
         roles: []
       }
     },
-    update() {
+    updateCreate() {
       this.submitPressed = true;
       this.user.role = []
       this.user.roles = this.$store.state.admin.roles.filter((role)=>{
