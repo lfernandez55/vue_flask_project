@@ -1,3 +1,6 @@
+The code in this repo contains a SPA and api.  When both are spun up the user is presented with the app depicted in the following screencast:
+https://www.screencast.com/t/Gika5P5DU
+
 In your first terminal, `cd` into the "api" folder. Start a virtual environment, and install the libraries in the requirements file.  Use `flask run` to start your Flask api in development server on localhost:5000.
 
 In your second terminal, `cd` into the "webapp" folder. Install your node dependencies with `npm install`. Run the development version of the Vue webapp with `npm run serve`. The webapp will be running on localhost:8080.
