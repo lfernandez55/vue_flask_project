@@ -1,6 +1,6 @@
 import Login from './components/public/Login.vue'
 import Home from './components/secure/Home.vue'
-import Profile from './components/profile/Profile.vue'
+import Profile from './components/secure/Profile.vue'
 import Warning from './components/public/Warning.vue'
 
 import Admin from './components/secure/Admin.vue'

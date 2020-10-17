@@ -23,11 +23,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# This not needed but see https://stackoverflow.com/questions/26980713/solve-cross-origin-resource-sharing-with-flask
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# cors = CORS(app, resources={r"/greeting": {"origins": "http://localhost:8080"}})
-# cors = CORS(app, resources={r"/greeting": {"origins": "*"}})
-
 # extensions
 db = SQLAlchemy(app)
 auth = HTTPBasicAuth()
