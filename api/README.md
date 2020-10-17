@@ -145,7 +145,7 @@ General desc: Updates an account
 Request headers: Basic auth with token*, and user object with id
 Returns: {'operation': 'success'}
 PUT
-http://127.0.0.1:5000/api/admin/user
+http://127.0.0.1:5000/api/admin/user/{id}
 
 Sample request user object:
 {"email":"member@example.com","firstname":"Momo","id":1,"lastname":"Man","roles":[{"id":2,"name":"admin"}],"username":"momoman"}
@@ -163,7 +163,7 @@ General desc: Deletes an account
 Request headers: Basic auth with token*, and user object with id
 Returns: {'operation': 'success'}
 DELETE
-http://127.0.0.1:5000/api/admin/user
+http://127.0.0.1:5000/api/admin/user/{id}
 
 ------------------------------------------------------------------------------
 9.
@@ -171,7 +171,7 @@ General desc: Updates a role
 Request headers: Basic auth with token*, and role object with id
 Returns: {'operation': 'success'}
 PUT
-http://127.0.0.1:5000/api/admin/role
+http://127.0.0.1:5000/api/admin/role/{id}
 
 Sample request role object:
 {"id":4,"name":"flunky"}
@@ -189,7 +189,7 @@ General desc: Deletes a role
 Request headers: Basic auth with token*, and role object with id
 Returns: {'operation': 'success'}
 DELETE
-http://127.0.0.1:5000/api/admin/role
+http://127.0.0.1:5000/api/admin/role/{id}
 
 *Basic auth with token requires token and random string. 
 See webapp/store/modules/admin.js and webapp/store/modules/auth.js

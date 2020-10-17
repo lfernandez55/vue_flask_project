@@ -54,11 +54,11 @@ def roles_list():
 
 ################## Update, Create, Delete User ########################
 
-@app.route('/api/admin/user', methods=['PUT'])
+@app.route('/api/admin/user/<id>', methods=['PUT'])
 @auth.login_required(role='admin')
 @auth.login_required
-def updateUser():
-    userObj = User.query.filter(User.id == request.json.get('id')).first()
+def updateUser(id):
+    userObj = User.query.filter(User.id == id).first()
     userObj.firstname = request.json.get('firstname')
     userObj.lastname = request.json.get('lastname')
     userObj.username = request.json.get('username')
@@ -106,24 +106,24 @@ def createUser():
     db.session.commit()
     return jsonify({'operation': 'success'})
 
-@app.route('/api/admin/user', methods=['DELETE'])
+@app.route('/api/admin/user/<id>', methods=['DELETE'])
 @auth.login_required(role='admin')
 @auth.login_required
-def deleteUser():
-    print('deleting user', request.json.get('id'))
-    userObj = User.query.filter(User.id == request.json.get('id')).first()
+def deleteUser(id):
+    print('deleting user', id)
+    userObj = User.query.filter(User.id == id).first()
     db.session.delete(userObj)
     db.session.commit()
     return jsonify({'operation': 'success'})
 
 ################## Update, Create, Delete Role ########################
 
-@app.route('/api/admin/role', methods=['PUT'])
+@app.route('/api/admin/role/<id>', methods=['PUT'])
 @auth.login_required(role='admin')
 @auth.login_required
-def updateRole():
-    print('updating role', request.json.get('id'))
-    roleObj = Role.query.filter(Role.id == request.json.get('id')).first()
+def updateRole(id):
+    print('updating role', id)
+    roleObj = Role.query.filter(Role.id == id).first()
     roleObj.name = request.json.get('name')
     db.session.add(roleObj)
     db.session.commit()
@@ -142,12 +142,12 @@ def createRole():
     db.session.commit()
     return jsonify({'operation': 'success'})
 
-@app.route('/api/admin/role', methods=['DELETE'])
+@app.route('/api/admin/role/<id>', methods=['DELETE'])
 @auth.login_required(role='admin')
 @auth.login_required
-def deleteRole():
-    print('deleting role', request.json.get('id'))
-    roleObj = Role.query.filter(Role.id == request.json.get('id')).first()
+def deleteRole(id):
+    print('deleting role', id)
+    roleObj = Role.query.filter(Role.id == id).first()
     db.session.delete(roleObj)
     db.session.commit()
     return jsonify({'operation': 'success'})

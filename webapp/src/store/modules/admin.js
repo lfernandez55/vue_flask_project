@@ -104,7 +104,7 @@ const actions = {
       });
   },
   updateUser: ({ commit, rootState }, userObj) => {
-    let url = Vue.prototype.$hostname + '/api/admin/user';
+    let url = Vue.prototype.$hostname + '/api/admin/user/' + userObj.id;
     fetch(url, {
       method: "PUT",
       headers: {
@@ -185,7 +185,7 @@ const actions = {
       });
   },
   deleteUser: ({ commit, rootState }, userObj) => {
-    let url = Vue.prototype.$hostname + '/api/admin/user';
+    let url = Vue.prototype.$hostname + '/api/admin/user/' + userObj.id;
     fetch(url, {
       method: "DELETE",
       headers: {
@@ -232,7 +232,7 @@ const actions = {
   },
   // ROLES ACTIONS -------------------------------------------------------------
   updateRole: ({ commit, rootState }, roleObj) => {
-    let url = Vue.prototype.$hostname + '/api/admin/role';
+    let url = Vue.prototype.$hostname + '/api/admin/role/' + roleObj.id;
     fetch(url, {
       method: "PUT",
       headers: {
@@ -311,7 +311,7 @@ const actions = {
       });
   },
   deleteRole: ({ commit, rootState }, roleObj) => {
-    let url = Vue.prototype.$hostname + '/api/admin/role';
+    let url = Vue.prototype.$hostname + '/api/admin/role/' + roleObj.id;
     fetch(url, {
       method: "DELETE",
       headers: {
