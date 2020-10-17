@@ -10,6 +10,7 @@ See: https://flask-user.readthedocs.io/en/latest/basic_app.html
 
 API routes:
 
+1.
 General desc:  Return token for token based authorization
 Request headers: Basic authorization, username and password.
 Returns: token
@@ -23,7 +24,7 @@ Sample return:
 }
 
 --------------------------------------------------------------------------
-
+2.
 General desc: Returns user's account data
 Request headers: Basic auth with token*
 Returns: user's basic account data in json format
@@ -49,7 +50,7 @@ Sample return:
 }
 
 ----------------------------------------------------------------------------
-
+3.
 General desc: Updates user's firstname and/or lastname
 Request headers: Basic auth with token*
 Returns: user's basic account data in json format
@@ -75,7 +76,7 @@ Sample return:
 }
 
 ------------------------------------------------------------------------------
-
+4.
 General desc: Returns list of all users
 Request headers: Basic auth with token*
 Returns: list of all users
@@ -117,7 +118,7 @@ Sample return:
 ]
 
 ------------------------------------------------------------------------------
-
+5.
 General desc: Returns a list of all roles
 Request headers: Basic auth with token*
 Returns list of all roles
@@ -139,7 +140,7 @@ Sample return:
   }
 ]
 ------------------------------------------------------------------------------
-
+6.
 General desc: Updates an account
 Request headers: Basic auth with token*, and user object with id
 Returns: {'operation': 'success'}
@@ -149,7 +150,7 @@ http://127.0.0.1:5000/api/admin/user
 Sample request user object:
 {"email":"member@example.com","firstname":"Momo","id":1,"lastname":"Man","roles":[{"id":2,"name":"admin"}],"username":"momoman"}
 ------------------------------------------------------------------------------
-
+7.
 General desc: Creates an account
 Request headers: Basic auth with token*, and user object
 Returns: {'operation': 'success'}
@@ -157,7 +158,7 @@ POST
 http://127.0.0.1:5000/api/admin/user
 
 ------------------------------------------------------------------------------
-
+8.
 General desc: Deletes an account
 Request headers: Basic auth with token*, and user object with id
 Returns: {'operation': 'success'}
@@ -165,7 +166,7 @@ DELETE
 http://127.0.0.1:5000/api/admin/user
 
 ------------------------------------------------------------------------------
-
+9.
 General desc: Updates a role
 Request headers: Basic auth with token*, and role object with id
 Returns: {'operation': 'success'}
@@ -175,7 +176,7 @@ http://127.0.0.1:5000/api/admin/role
 Sample request role object:
 {"id":4,"name":"flunky"}
 ------------------------------------------------------------------------------
-
+10.
 General desc: Creates a role
 Request headers: Basic auth with token*, and role object
 Returns: {'operation': 'success'}
@@ -183,11 +184,14 @@ POST
 http://127.0.0.1:5000/api/admin/role
 
 ------------------------------------------------------------------------------
-
+11.
 General desc: Deletes a role
 Request headers: Basic auth with token*, and role object with id
 Returns: {'operation': 'success'}
 DELETE
 http://127.0.0.1:5000/api/admin/role
 
-*Basic auth with token requires token and random string.
+*Basic auth with token requires token and random string. 
+See webapp/store/modules/admin.js and webapp/store/modules/auth.js
+to see how to create a valid auth request with a token in fetch
+
