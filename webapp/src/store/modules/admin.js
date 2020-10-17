@@ -67,7 +67,7 @@ const actions = {
   //             }
   //         })
   //         .catch((err) => {
-  //             alert("In actions.js error thrown: " + err)
+  //             alert("In admin.js error thrown: " + err)
   //         });
   // }
   getRoles: (context) => {

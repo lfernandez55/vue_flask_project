@@ -2,6 +2,16 @@ In your first terminal, `cd` into the "api" folder. Use `flask run` to start you
 
 In your second terminal, `cd` into the "webapp" folder. Install your node dependencies with `npm install`. Run the development version of the Vue webapp with `npm run serve`. The webapp will be running on localhost:8080.
 
+Accounts:
+
+Username: lfernandez
+Password: white
+Roles: admin, agent
+
+Username: momoman
+Password: blue
+Roles: member
+
 ---------------
 
 The contents in API were created using standard Flask dev processes. See the readme in root/API for a description of the derivative projects.

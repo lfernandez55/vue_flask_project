@@ -1,6 +1,5 @@
 <template>
   <div id="admin">
-    <!-- {{this.$store.state.admin.roles}}  -->
     <div class="text-right top_div">
       <router-link 
        class="btn btn-default btn-primary"
@@ -47,10 +46,8 @@ export default {
     return {};
   },
   mounted: function() {
-    // this.$store.dispatch("loadAccountData");
     this.$store.dispatch("getUsers");
     this.$store.dispatch("getRoles");
-    // setTimeout(()=>{this.$store.dispatch("getUsers3")},2000)
   },
   methods: {
     deleteUser(id) {

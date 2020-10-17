@@ -1,5 +1,5 @@
 <template>
-  <div id="admin">
+  <div id="agent">
     <h1>Agent Component</h1>
 
   </div>

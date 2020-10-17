@@ -33,7 +33,6 @@ export default {
     '$store.state.general.newRouteRequest'(value) {
       if (value != ""){
         this.$router.replace({ name: value});
-        // this.$store.state.general.newRouteRequest = "";
         this.$store.commit('CLEAR_NEW_ROUTE_REQ')
       }
       },

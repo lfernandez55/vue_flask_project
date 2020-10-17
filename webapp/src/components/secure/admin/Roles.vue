@@ -1,6 +1,5 @@
 <template>
   <div id="roles">
-    <!-- {{this.$store.state.admin.roles}}  -->
     <div class="text-right top_div">
       <router-link
         class="btn btn-default btn-primary"
@@ -43,7 +42,6 @@ export default {
     return {};
   },
   mounted: function() {
-    // roles already loaded when User.vue component is loaded
     this.$store.dispatch("getRoles");
   },
   methods: {

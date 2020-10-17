@@ -3,7 +3,6 @@
     <div class="col-sm-3 col-md-3 col-lg-3 col-centered"></div>
     <div class="col-sm-7 col-md-6 col-lg-5 col-centered">
       <h2>User profile {{ this.$store.state.auth.firstName }}</h2>
-      <!-- <h4>{{ this.$store.state.auth.alertMsg }}</h4> -->
       <form
         action=""
         method="POST"
@@ -45,11 +44,6 @@
           tabindex="30"
         />
       </form>
-      <!-- 
-
-        <p><a href="/user/change-password">Change password</a></p>
-    
-        </div> -->
     </div>
   </div>
 </template>

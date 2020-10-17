@@ -2,7 +2,6 @@
 <div>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <!-- <transition name="slide" mode="out-in"> -->
       <transition name="fade">
         <div
           id="flash"

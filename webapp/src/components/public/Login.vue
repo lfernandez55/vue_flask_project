@@ -64,15 +64,5 @@ export default {
 </script>
 
 <style scoped>
-/* #login {
-  width: 500px;
-  border: 1px solid #cccccc;
-  background-color: #ffffff;
-  margin: auto;
-  margin-top: 50px;
-  padding: 20px;
-}
-h4 {
-  color: red;
-} */
+
 </style>

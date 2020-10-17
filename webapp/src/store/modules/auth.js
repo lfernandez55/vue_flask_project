@@ -7,9 +7,7 @@ const state = {
   firstName: "",
   lastName: "",
   roles: []
-  // ,
-  // alertType: "",
-  // alertMsg: ""
+
 }
 
 const mutations = {
@@ -86,7 +84,7 @@ const actions = {
         }
       })
       .catch((err) => {
-        alert("In actions.js error thrown: " + err)
+        alert("In auth.js error thrown: " + err)
       });
   },
   updateProfile: ({ commit }, userObj) => {
