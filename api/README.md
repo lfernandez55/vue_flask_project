@@ -7,6 +7,15 @@ as well as flask-user
 
 See: https://flask-user.readthedocs.io/en/latest/basic_app.html
 
+For a rudimentary demo of how I use the auth api to get a token
+and then to use that token to access other resources visit:
+
+https://github.com/lfernandez55/fetch_with_vue
+
+start up the server and visit localhost:5000.
+
+
+
 
 API routes:
 
